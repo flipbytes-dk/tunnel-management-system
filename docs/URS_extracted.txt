@@ -1,0 +1,2542 @@
+=== PDF: docs/URS With Incident Response Matrix.pdf ===
+Total Pages: 99
+
+
+================================================================================
+PAGE 1
+================================================================================
+Tunnel Management System
+User Requirement Specifications (URS)
+Ver 30 Jan 2025
+
+================================================================================
+PAGE 2
+================================================================================
+Agenda
+• Preliminaries
+• Tunnel Plant Monitoring & Control System 
+(PMCS)
+• Electrical Distribution System
+• Lighting System
+• Ventilation System
+• Drainage System
+• Environment Monitoring System
+• Traffic Monitoring & Control System
+• Fire Life Safety & Security System
+• Voice Communication System
+• Data Transmission & Control System
+• Miscellaneous Systems
+
+
+================================================================================
+PAGE 3
+================================================================================
+Preliminaries
+
+
+================================================================================
+PAGE 4
+================================================================================
+Important Tunnel Standards wrt
+Control Room
+•NFPA 502: for Control Responsibility 
+demarcation of ITS Network and ITS Tunnel 
+responsibility. Tunnel ITS monitoring & 
+controlling using Tunnel SCADA system; 
+Tunnel ITS includes all equipment related to 
+stopping traffic approaching tunnels & 
+stopping traffic from entering tunnels direct 
+approaches
+•CD 352: Design of Road Tunnels
+•ISO 11064: Ergonomic design of Control 
+Centre
+•PIARC Technical Committee Report: Road 
+Tunnels: Vehicle Emissions and Air Demand 
+for Ventilation 
+
+================================================================================
+PAGE 5
+================================================================================
+Tunnel Categories
+Tunnel Length (m) Category NFPA 502 & 
+IAN 020
+Category CD 352 EU Directive 
+2004/54
+<90 X / /
+<150 A / /
+>150, <240 A D /
+>240, <300 B D /
+>300, <1000 C 5 x C / 5 x D 5 x Class I
+>1000 D B Class II
+*Other Categorizations exist based on Annual Average Daily Traffic, type of Traffic allowed (HGV , Dangerous Goods Vehicles…), etc
+
+================================================================================
+PAGE 6
+================================================================================
+Tunnel Control Room System Objectives
+Incident Prevention
+• Automated & Operator based 
+Response. Operator (Manual) 
+over-rides / supersedes 
+Automated responses
+• Local Control Room actions 
+supersede Central Control 
+Room actions in hierarchical 
+fashion.
+• Traffic Management
+• Traffic Management Plans
+• Visibility, Drainage, 
+Environment (wind speed & 
+temperature) & Air Quality 
+Management
+Incident Management
+• Automated & Operator based 
+Response. Operator (Manual) 
+over-rides / supersedes 
+Automated responses
+• Local Control Room actions 
+supersede Central Control 
+Room actions in hierarchical 
+fashion. Upper layer CRs apply 
+higher level traffic control eg
+traffic re-routing.
+• Detection
+• Response
+• Tunnel Incident Matrix
+• Ventilation Operations 
+Procedures
+• Incident Management
+• Recovery
+Other Necessities
+• Hierarchical Control Rooms
+• Fall-back Facility: 2 CR Active-
+Active DC-DR Failover
+• Access Control with logging
+• Auto & manual logging of 
+Operator actions for MIS
+• Redundant monitored
+Electrical (Raw + Gen or, 2 sub-
+stations, UPS) & Network 
+(redundant, fail-safe) 
+• 4 Operating Modes (with sub-
+modes):
+• Normal System Operating 
+Mode
+• Incident Operating Mode
+• Maintenance & Training Mode
+• Tunnel Closure Mode
+
+================================================================================
+PAGE 7
+================================================================================
+Control Hierarchy - Tunnel Control Centres
+Regional / Traffic Corridor Level
+Road Asset 
+Management Centre 
+1
+Road Asset 
+Management Centre 
+2
+Road Asset 
+Management Centre 
+n
+Tunnel 1 Operations 
+Control Centre(s)
+Tunnel 2 Operations 
+Control Centre(s)
+Tunnel m 
+Operations Control 
+Centre(s)
+➢ Objective: Re-route traffic at regional / 
+corridor level
+➢ Info available: Tunnel Open / Closed / 
+Semi-Closed
+➢ Tunnel Monitoring & Controls: As 
+available in RAMC
+➢ Objective: Monitoring & 
+Controlling of Tunnel at TOCC 
+(Primary) & RAMC (Secondary)
+➢ Info available: All System inputs
+➢ Tunnel Monitoring & Controls: 
+Incident Prevention & 
+Management upto Lane / Bore / 
+Tunnel closure
+*RAMC & TOCC can be co-located but role/responsibilities are clearly demarcated
+Tunnel Services 
+Building 1
+Tunnel Services 
+Building k
+➢ Tunnel Support 
+Equipment
+➢ Local Control 
+Room (Optional)*sometimes multiple tunnel TSBs in an area clubbed into 1 TOCC
+
+================================================================================
+PAGE 8
+================================================================================
+Tunnel Control Centre(s) – Typical Minimum hardware
+Tunnel Services 
+Building
+• Tunnel Category <B: 1 workstation, 1 SCADA terminal, 1 CCTV Monitor & Controller, any other necessary Console. Access 
+Control
+• Tunnel Category ≥B: 2 Operator workstations, 1 Supervisor workstation, 2 SCADA terminals with monitors, 1 Video Wall with 
+Controller, PA System Console, any other necessary Console. Access Control
+Tunnel Operations 
+Control Centre
+• Video Wall & Controller, Operator consoles (minimum 2), Supervisor console  
+• Server Room
+• Visitor Gallery
+• Welfare facilities for 24x7 Operations
+• Access Control
+Road Asset 
+Management 
+Centre
+• Similar to TOCC but at larger scale depending upon number of TOCC’s to be handled
+• TOCC & RAMC may be a co-located but TOCC & RAMC roles clearly demarcated from operational view-point
+
+================================================================================
+PAGE 9
+================================================================================
+Tunnel System Operating Modes
+Normal 
+System 
+Operating 
+Mode
+Automatic 
+System 
+Operating 
+Mode
+All Tunnel Systems operating automatically in response to various controlling parameters, 
+while they remain ready to respond to a changed conditions. 
+Pre-
+determined 
+System 
+Operating 
+Mode
+All Tunnel Systems being operated in a predetermined or pre-programmed sequence, other 
+than the normal mode. 
+Examples: Morning and afternoon rush hour periods or VIP transit where the operation of a 
+various system, such as ventilation, is pre-programmed to operate in a mode rather than 
+operate automatically in response to a controlling parameter
+Incident Operating Mode Incident operating mode shall vary depending upon the type of incident encountered and 
+the tunnel operating procedures shall identify the appropriate system operations necessary 
+for various incidents. 
+The modes shall be pre-programmed to the largest extent possible in order to allow the 
+tunnel operators to quickly respond in a minimal number of operations and in an efficient 
+manner with reduced potential for operator error. 
+Examples of incident operating modes include the use of the traffic control systems, DMS, 
+lane usage signals during tunnel incidents, and the use of Ventilation, Public Address, Fire 
+Fighting systems during tunnel fire incidents .
+The operator should for example be able to implement a partial or total closure of a tunnel 
+bore including the appropriate tunnel diversion with one command on the HMI screen 
+
+================================================================================
+PAGE 10
+================================================================================
+Tunnel System Operating Modes
+Maintenance 
+Mode
+Tunnel 
+Maintenance Mode
+The maintenance operating mode shall consist of all Tunnel Systems operating in a
+predetermined way specifically prepared for the tunnel maintenance activities being
+performed. 
+This mode may include a specific and detailed closure plan and specific
+operation or shut down of various systems to support the maintenance activities
+Partial Systems 
+Capacity 
+Operations
+Maintenance requirements or failures and other circumstances may result in certain 
+Tunnel Systems to be operated under partial capacity.
+Tunnel Systems Minimum Operating Requirements  for each tunnel shall be
+determined based upon the level of the system redundancy, the ability to introduce
+permanent or temporary mitigating solutions and the impact on life safety.
+Tunnel operating policies and procedures shall be developed and included in 
+the Tunnels Operations Manual, to document the various systems that are 
+allowed to operate at a reduced capacity without closing the tunnel, to identify 
+the acceptable level of reduced capacity, the triggers for closing the tunnel to 
+traffic and any other mitigating provisions that must be put in place to maintain 
+safe conditions for the tunnel users.
+
+================================================================================
+PAGE 11
+================================================================================
+Tunnel System Operating Modes
+Tunnel 
+Closure 
+Mode
+Unplanned Closure The RAMC operator shall have instructions to fully or partly close the tunnel by way 
+of DMS, LCS and any other available means of automatic tunnel closure in the 
+following events: 
+▪ Fire in the tunnel
+▪ Tunnel Flooded
+▪ Hazardous spillage
+▪ Total failure of mains power (including Emergency Power Supplies)
+▪ Total failure of lighting
+▪ Dangerously high levels of pollution
+▪ Other safety critical reasons (road traffic collision, etc.)
+Planned Closure Tunnels closures for routine maintenance or inspection activities shall be 
+programmed during periods of minimum impact on road traffic.
+Partial closure of tunnel bores to carry out maintenance activities may be 
+considered but it is not recommended in terms of maintenance personnel and 
+motorists’ safety in tunnels.
+
+================================================================================
+PAGE 12
+================================================================================
+Tunnel Event Risk Management Process
+Eliminate
+ Avoid
+ Prevent
+ Mitigate
+ Accept
+Tunnel Event/Incident Scenarios
+Vehicle related
+• Fire in Tunnel
+• Vehicle Collision
+• Breakdown
+• Debris on Road
+• Over-height vehicle
+• Traffic Queue
+• Hazardous loads spillage
+• Slow moving loads
+• Abnormal loads
+• High concentration of 
+emission fumes
+• Low visibility
+Non-Vehicle related
+• Pedestrians in tunnel
+• Animals in tunnel
+• Vandalism
+• Terrorist attack
+Tunnel Systems related
+• Lighting Failure
+• Ventilation Failure
+• Pumping Failure
+• Communication Failure
+• Power Failure
+Weather Hazard related
+• Fog
+• Rapid, air vapour
+condensation on 
+windscreen, mirrors etc.
+• High winds
+• Flood
+• Dazzle from the sun
+• Sandstorm
+*Click here to open Event/Incident Response Matrix
+
+================================================================================
+PAGE 13
+================================================================================
+Traffic Management Plan
+Plans to be programmed into System for all tunnel closure scenarios. Includes:
+Traffic Diversion Plans
+• Necessary diversion routes
+• All traffic signals and messaging signs to be utilized
+• Specify the corresponding function or status of each traffic signal and messaging sign on the affected route during the diversion
+• Adjusting traffic signal timing and phasing to channel unexpected traffic flow
+• Deployment of pre-planned and pre-approved messages sequencing at all the DMSs
+Below signage and systems used in the tunnel, its approaches and on the adjacent 
+roads. Additionally, reinforced with traffic cones, lanterns and signs.
+Tunnel Closure Signage & 
+Systems
+• Lane Control Signs
+• Dynamic Message Signs
+• Wig Wag or Aspect Signals
+• Physical Gates or Barriers
+• Traffic Signals (Adjacent Roads)
+All lines and modes of communication necessary for its implementation
+Communication Plans
+• Communication with various stakeholders
+• TMCS interfacing with various relevant software
+• Messages on DMS
+• Media
+• Advance warnings and announcements
+• Use of Google Maps, GPS information, internet 
+*Tunnel specific
+
+================================================================================
+PAGE 14
+================================================================================
+Traffic Management Plan (TMM)
+Each Traffic Management Mode shall be titled in line with or, similar to the below 
+format. One click of button to select a particular TMM will activate the closure 
+equipment deployment sequence to implement the associated closure
+Traffic Management 
+Modes
+2 levels of control as per NFPA 502. (a) Level 1: Stop traffic approaching tunnel 
+portal (7.6.1) (b) Level 2: Stop traffic from entering tunnel’s direct approaches 
+(7.6.2). Means of stopping traffic entering a tunnel:
+Stopping Traffic 
+Entering Tunnels
+• Lane control signs
+• Dynamic messaging signs
+• Red traffic signs (Flashing red signs on DMS) / Flashing Amber Beacons
+• Use of various communication methods to raise public awareness (Radio, Awareness campaign, leaflets, DMS, Bluetooth, google maps, GPS information  …)
+• Barriers shall not be required for Category B, A and X tunnels. 
+• All category C & D tunnels shall be provided with ducting from the tunnel to a pit at a suitable location for installing a suitable barrier system or other suitable arrangement post project 
+completion to future proof the installation.
+• Barriers shall be provided for Category D tunnels (ref IAN 020) where there isn’t enough distance to provide the appropriately spaced ITS, the installation of the barrier doesn’t introduce 
+a risk to motorists and the operational risk assessment concludes that the reduced ITS provisions for these tunnels will not meet the safety level provided by using a barrier.
+*Tunnel specific
+
+
+================================================================================
+PAGE 15
+================================================================================
+Tunnel Sub-Systems / Equipment
+Tunnel System 
+Category
+Tunnel sub-system / Equipment
+Tunnel Safety 
+System 
+Support 
+Equipment
+1. High Voltage Switchgears & Transformers
+2. Low Voltage Distribution
+3. UPS System
+4. Generators
+5. Way finding Signs
+6. Cross Passage Doors/ Egress Doors/ Escape 
+Gallery and Stairs
+7. Fireman’s Panels
+Tunnel Safety 
+System
+1. Tunnel Emergency Panels
+2. Tunnel Lighting
+3. Tunnel Ventilation
+4. Pumped Drainage
+5. Attenuation Tanks (Sump) level monitoring 
+systems
+6. Attenuation Tanks (Sump) Gas Detection and 
+Ventilation Systems
+7. Attenuation Tanks (Sump)  Fire Detection and 
+Suppression Systems
+8. Monitoring Instrumentation, including air quality 
+monitoring, Anemometers, Flood Monitoring, 
+Temperature
+9. Linear Heat Detection System
+10. Tunnel Fixed Fire Extinguishing Systems
+11. Traffic Monitoring Systems
+12. Closed Circuit Television (CCTV)
+13. Video Automatic Incident Detection (VAID)
+14. Over-height Detection System
+15. Traffic Control Signs: DMS, LCS, Traffic Signals
+16. Emergency Telephones
+17. Radio Rebroadcast and Break-in System
+18. Public Address System
+19. Mobile Phone Antennae System
+20. TSB Fire Detection, Alarm and Suppression 
+Systems
+21. Buildings Access Control and Security Systems
+22. TSB Heating, Ventilation & AC
+
+================================================================================
+PAGE 16
+================================================================================
+Tunnel Plant Monitoring & Control 
+System (PMCS)
+
+================================================================================
+PAGE 17
+================================================================================
+Plant Monitoring & Control System (PMCS) functions
+SNo Function
+1 Provide continuous, effective monitoring of major data derived from installed measuring systems such 
+as air quality, wind speed, visibility, luminance and any other element defined in the tunnel design 
+document 
+2 Monitor Plant running times and provide comprehensive periodic records of overall operating costs and 
+energy efficiency 
+3 Provide continuous, effective monitoring of all Tunnel Systems identified in the tunnel design 
+document 
+4 Alert Operators and maintainers to plant status (including changes in state), alarms, malfunctions, 
+especially those likely to cause disruption to the safe operation of the tunnel 
+5 Provide clear, comprehensive displays and printed logs of plant status to the operator terminal 
+6 Record all monitoring information including the status of all system database points, alarm inputs and 
+data trends
+7 Provide comprehensive displays and printed logs based upon historical data 
+8 Provide the required degree of supervision and control
+9 Provide automatic and manual control of Tunnel Systems
+
+================================================================================
+PAGE 18
+================================================================================
+What does the PMCS eventually ensure?
+Monitor the 
+equipment status 
+and condition
+Relay and present 
+equipment outputs 
+(Digital or 
+Analogue) and 
+Alarms in a user-
+friendly GUI
+Automatic control 
+of equipment based 
+on programmed 
+parameters using 
+corresponding 
+equipment outputs
+Manual control of 
+equipment using 
+GUI
+Recording historical 
+data and trends
+How exactly does PMCS function?
+•Eg Environmental Sensors
+•Eg Electrical Contacts
+Field Inputs
+•Master/Standby PLC configuration
+•MODBUS protocol preferred 
+communication Standard
+•Fundamental: PLC, not the SCADA, is 
+in control of the Tunnel Systems 
+functionality. PLCs continue 
+controlling tunnel systems, even when 
+SCADA Servers and Terminals non-ops
+PLC’s
+•Dual redundant FO network
+•2 types of Network:
+•PLC Network
+•SCADA Network
+Network
+•Receives field inputs over SCADA 
+network
+•Provides a ‘window’ into the PLCs 
+through which the operator can 
+observe system status and initiate 
+controlling actions
+•Performs Automatic control
+•Records historical data & trends
+SCADA Server
+•Manual Control of eqpt using MMI
+•Power & Network Status
+•MIS
+Touchscreen HMI 
+@Control Cabinet & 
+SCADA Client @CR
+
+================================================================================
+PAGE 19
+================================================================================
+Is there a specific list of functionalities from TSB, elsewhere?
+• Monitoring and control of lighting 
+• Monitoring of environmental sensors & initiate relevant 
+systems controls as appropriate 
+• Monitoring of electrical supplies and distribution (DNO and 
+Emergency)
+• Monitoring and control of pumping equipment 
+• Monitoring and control of Ventilation equipment 
+• Monitoring and control of other HVAC 
+• Monitoring of run hours 
+• Global Alarm Resets
+• User Security
+• Control Priority
+• Alarm And Event Handling
+• Monitoring and control of variable thresholds & set points. 
+• Monitoring of building services such as fire and intruder 
+alarms 
+• Monitoring of panel door contacts ( Safety Critical) 
+• Monitoring of emergency phones 
+• Monitoring of portal lighting control panels 
+• Analogue data archiving to separate trend database 
+• Real-time and historical trending of analogue points 
+• Data Logging And Archiving 
+• Historical Data Browser 
+• Help Facility 
+• User Account Administration 
+• Multi Systems integration for events management
+From TSB workstation
+Additional - from all SCADA terminals / workstations
+• Graphical Modelling
+• Lighting Hours Run 
+• Historical Functions
+• Data Trending
+• OPC Client Interface to SCADA Server
+• Alarm and Event Viewing 
+• Alarm Acknowledgement
+• Alarm Banner Control
+• Alarm and Event Handling
+• Data Logging and Archiving
+• Graphics Mimics Development & Run Time 
+Display
+
+================================================================================
+PAGE 20
+================================================================================
+Priorities / Control Hierarchy, revisited & elaborated…
+SCADA Terminals Priorities
+• Operator access priority determined by log-in 
+credentials status
+• Login credentials can over-ride terminal access priority 
+(eg Supervisor /Administrator on a low priority terminal 
+has priority over an operator at a higher priority terminal)
+• Process for the transfer of system control between 
+terminals:
+1) Operator attempts to control, Graphical User Interface (GUI) flags 
+"Are you requesting control?”, or Operator initiates a request for 
+control - request is presented on the current control terminal.
+2) Control transfer request is granted by the operator at the current 
+control terminal or control is automatically transferred after a 
+predetermined time-out
+Tunnel System Control Priorities
+• Where a system is integrated to more than one other 
+system, two automation modes are configured for 
+automation priorities. Mode and and to avoid potential 
+conflicting commands between the different systems, 
+Response & Control should be as follows:
+• Response Mode: Manual or automatic response, it is the 
+automatic operation of a system triggered by another 
+system, or manual operation of a system triggered by 
+human intervention. (E.g. ventilation fans operating 
+automatically when the pollution level in the tunnel reach 
+a programmed trigger value) 
+• Control Mode: Manual or automatic response, This is the 
+same as the Response Mode in terms of activation, but 
+in this case the triggering system or human operator has 
+priority and can take control of the controlled system 
+even if it is already in the Response Mode and will only 
+relinquish control to a higher hierarchy system or 
+operator. (E.g. Fire in the tunnel response will, by way of 
+the Fire Alarm System or the operator via HMI, 
+automatically take control of the ventilation fans even if 
+the ventilation fans are already in operation for pollution 
+control) 
+▪ Already aware: local tunnel SCADA terminal has priority on higher layer CR’s ie TOCC / RAMC terminals
+▪ However, to avoid potential conflicting commands between terminals, access & control priorities as follows:
+
+================================================================================
+PAGE 21
+================================================================================
+Tunnel Personnel: Roles & Responsibilities
+Tunnel Manager
+• Overall responsibility for matters relating to the 
+administration, operation and maintenance of tunnels
+Senior Tunnel Engineer
+• Tunnels Manager’s deputy assisting in matters relating 
+to administration, operation and maintenance of tunnels
+Maintenance Engineers
+• Reporting to the Tunnel Manager in matters relating to 
+tunnel maintenance, ensuring tunnel maintenance is 
+conducted in accordance with the relevant standards
+Tunnel Control Room Operator
+• routine monitoring of the system, fault and incident 
+management on a 24/7 basis using: CCTV; the Tunnel 
+SCADA and other installed ITS. All operators will be 
+trained on the use of all tunnel systems and procedures. 
+They will also be trained on compliance with CCTV and 
+Control Room regulations and protocols
+Tunnels Duty Manager
+• The Tunnels Manager and Senior Engineer will be on 
+a rolling weekly standby roster for incidents requiring 
+a Tunnels Duty Manager. For minor incidents the 
+Tunnels Incident Response Unit (IRU) will be called 
+out to deal with the situation and the Tunnels 
+Manager or his deputy will be informed via a text 
+message followed by a report the following day
+Incident Response Units (IRU)
+• Emergency response call out will be carried out on 
+three levels:
+• Level 1: responses by network Incident Response 
+Vehicle (IRV) for general issues (i.e. Debris removal, 
+surface patching, drain blockage related flooding);
+• Level 2:  responses by Tunnels core team or third 
+parties for tunnels specialist systems or operational 
+issues.
+Tunnels Standby and Call-Out Team
+
+================================================================================
+PAGE 22
+================================================================================
+User Accounts – Roles & Rights
+User (with own 
+password)
+User Role User Rights
+- View Only ▪ Default State
+▪ No password required
+Individual 1, 2, …L Operator Restricted to screen pages required to control 
+traffic, tunnel systems for events response and 
+emergency situations, status and alarm list filtered 
+for relevant information only, report generation
+Individual 1, 2, …M Maintenance 
+Engineer
+Restricted to screen pages required to carry out 
+maintenance and repair functions, full status and 
+alarm list, report generation
+Individual 1, 2, …N Supervisor All of the above plus user management functions, 
+database management functions, report generation
+Individual 1, 2, …O Administrator 
+/Programmer
+Full access to SCADA application program
+
+================================================================================
+PAGE 23
+================================================================================
+SCADA MMI/GUI
+1) Overview Screen (including, geographical map with superposed tunnel 
+or tunnels plans and ITS equipment) 
+2) Schematic Map of the tunnel including safety systems arranged into an 
+easier grasp layout 
+3) Lighting 
+4) Electrical Distribution 
+5) Tunnel Ventilation 
+6) Service Building Security 
+7) Environmental 
+8) Pumping 
+9) Fire Safety 
+10)System Network Communications 
+11)Parameter Input screens
+12)Lighting Control Popup window
+
+================================================================================
+PAGE 24
+================================================================================
+Alarm & Event Monitoring - MMI Rules
+• Alarm priorities shall be categorized as follows: 
+• URGENT safety related alarms, which require immediate action 
+• ALERT system or maintenance alarms which do not immediately 
+jeopardize tunnel operation 
+• RECORD all other events that are part of the normal operation of the tunnel 
+• All Urgent and Alert notifications shall require operator 
+acknowledgement
+• A full list of alarms and their priorities shall be generated during 
+detailed system design
+• The alarms list window shall contain all the necessary 
+information such as affected system, date, time, status, 
+category… 
+
+================================================================================
+PAGE 25
+================================================================================
+Electrical Distribution System
+
+================================================================================
+PAGE 26
+================================================================================
+Electrical Distribution System – revisited & elaborated
+• Categories of Electrical Distribution Systems: 
+• High Voltage
+• Medium Voltage
+• Low Voltage: power metering systems to allow continuous monitoring and recording of the 
+energy consumed by individual systems such as ventilation, lighting (threshold, interior and 
+total lighting), UPS, general electrical equipment and total energy for the tunnel 
+• Emergency Power Distribution System
+• Redundancy: already aware / as above. Elaborations:
+• Redundant electrical system capable of supporting all tunnel systems on full load during 
+normal operations
+• All safety critical systems (for example, fire/life safety related equipment) supplied by the 
+emergency power distribution system  
+• Maintenance: 
+• Design to allow routine maintenance without disruption of the traffic in each tube 
+▪ Already aware: Input Power supply redundancy:
+▪ Raw power + Generator or, Raw power from 2 sub-stations; and,
+▪ UPS for backup
+
+================================================================================
+PAGE 27
+================================================================================
+Electrical Distribution System – UPS
+• Online UPS shall be installed to provide power to critical loads for which a momentary 
+power outage or interruption is not acceptable
+• Critical Equipment List (Project specific):
+• Tunnel emergency lighting 
+• All other emergency lighting 
+• Emergency signs 
+• Fire alarm systems 
+• All voice communications systems 
+• All data transmission and control systems 
+• All traffic detection and control systems 
+• All tunnel environmental monitoring 
+• All security systems 
+• Buildings emergency lights, fire alarm systems, emergency equipment 
+• Backup: 2 hours (project specific)
+• Note: Sometimes Emergency Power also defined as auto-start generator + UPS. In this case, 
+UPS backup is 30 mins – 60 mins.
+• If UPS malfunctions, power shall automatically connect the load directly to the normal 
+supply while opening the output power side of the UPS. Also, maintenance by-pass shall be 
+provided to enable manual transfer of the load to the normal supply for routine service or 
+maintenance of the UPS 
+
+================================================================================
+PAGE 28
+================================================================================
+Electrical Distribution System – Monitoring & Control
+• High Voltage Transformers 
+• Monitor Status of incoming and 
+outgoing supply 
+• LV Supply 
+• Monitor Status of incoming 
+supply 
+• Monitor Status of main 
+breakers 
+• UPS 
+• Monitor Health Status of 
+inverter 
+• Monitor Health Status of 
+battery 
+• Monitor operation status
+• Power Metering Systems 
+• Monitor and record main power 
+consumption, Voltage and Current 
+• Monitor and record systems power 
+consumption, Voltage and Current 
+• Generators 
+• Monitor operation status 
+• Monitor Run Hours 
+• Monitor Fuel tank Gage 
+• Automatic start generator for 
+weekly maintenance run 
+• Automatic Changeover Switch 
+• Monitor Status 
+• Operation
+
+================================================================================
+PAGE 29
+================================================================================
+Electrical Distribution System – Record
+• Generator Running Hours 
+• All power consumption, Voltage and current metering 
+
+================================================================================
+PAGE 30
+================================================================================
+Lighting System
+
+================================================================================
+PAGE 31
+================================================================================
+Lighting System – revisited & elaborated
+• Categories of Tunnel Lighting System
+• Tunnel Lighting & Emergency Lighting
+• Escape Route Lighting & Emergency Lighting
+• TSB Lighting & Emergency Lighting
+• Zones of Tunnel Lighting: Each zone has different lighting parameters and 
+characteristics defined to accommodate the eye adjustments needed by 
+motorists transitioning from outside to interior brightness levels. A step-down 
+method is generally used as a practical way to gradually reduce the luminance 
+in the threshold and transition zones to the level in the interior. 
+• Threshold Zone: helps the eye to adapt to the darkness inside of the tunnel. The length of 
+this zone depends on the traffic speed limit and the Safe Stopping Sight Distance. The 
+luminance in the threshold zone can be adjusted with respect to changes in the exterior 
+luminance, measured by photometers outside the tunnel portals.
+• Transition Zone
+• Interior Zone
+▪ Already aware: Tunnel Lighting is a Safety Critical System
+
+================================================================================
+PAGE 32
+================================================================================
+Lighting System – Emergency Lighting System
+• Specific Requirements
+• fire-resistant cabling
+• minimum illumination levels
+• uniformity ratio
+• time for supply interruption: interruptions cannot be greater than 0.5 
+seconds 
+• Additional provisions: 
+• For emergencies, lighting is supplemented with emergency exit signs 
+to guide pedestrians to emergency exits.
+• Connected to the emergency power supply from the emergency 
+distribution boards and wired in separate fire rated cables
+• Inside the emergency walkway, emergency lighting shall be supplied 
+via the UPS
+
+================================================================================
+PAGE 33
+================================================================================
+Lighting System – Monitoring & Control
+Normal Operation
+• Lighting controlled by Lighting Controller 
+which adjusts lighting levels adaptively in 
+the tunnel as per average luminance of 
+the tunnel entrance and surroundings 
+from suitably positioned luminance 
+photometers 
+• If the photometer for a particular tunnel 
+bore becomes faulty, the lighting 
+controller will activate predefined lighting 
+level. Minimum two settings is required:
+• One is night light setting (low level)
+• Second is day setting (high level) 
+• SCADA system interfaces with the 
+lighting system to:
+• Monitor and display the changes in lighting 
+levels
+• Display faulty luminaires (including 
+identification numbers) on the lighting mimic
+• Monitor and record luminaires run hours
+Emergency Operation
+• SCADA system shall have 
+automatic and manual control 
+provision to trigger the lighting 
+controller to switch the lighting in 
+the tunnel to a desired level. 
+• Manual control of the lighting is 
+triggered by the operator using 
+panel or desktop HMI
+• Automatic control of the lighting is 
+triggered by another tunnel system 
+as programmed (eg A fire detected 
+in the tunnel by LHD will switch the 
+lighting levels to 100%)
+
+================================================================================
+PAGE 34
+================================================================================
+Ventilation System
+
+================================================================================
+PAGE 35
+================================================================================
+Ventilation - Preliminaries
+• Relevance as per NFPA 502:
+• <240 meters tunnel: Not required
+• 240-1000 meters: Designer prerogative (decided as per project specific expected levels of 
+pollution & smoke control)
+• >1000 meters: Compulsory
+• Types of mechanical ventilation: different levels of complexity from fans running 
+forward, reverse and at variable speeds with anemometers to monitor air speed 
+in the tunnel and adjust fans speed to obtain the desired output
+• Redundancy: Loss of one or, two fans should not affect Ventilation Systems 
+capability. Smoke re-circulation to other Bore to be avoided by design.
+• Objectives of ventilation systems: 
+• To prevent the accumulation of harmful pollutants and ensure adequate air quality and 
+visibility is maintained throughout the Tunnel at all times and under all traffic conditions. 
+• To prevent back layering of smoke during a Tunnel fire incident and maintain a smoke-free 
+environment along the escape path.
+• Operations: From PMCS (Auto & Manual), Fan Control Panel, Emergency Stop 
+near the fan
+
+================================================================================
+PAGE 36
+================================================================================
+Ventilation – Air Quality & Visibility Control
+►CO/NOx values (Pollution)
+►Photometer or, VIDS or, XYZ Values 
+(Visibility)
+Compare each value to Set-Point 
+(Auto mode)
+< Set-Point 1: Fan Stop
+>Set-Point 1, <Set-Point 2: Switch On 
+certain fans
+>Set-Point 2: Switch on all fans at 
+highest speed. Operator gets Alarm – 
+decides if unsafe ie can exercise bore / 
+tunnel closure option
+Ventilation – Smoke Control
+• Is a Safety Function
+• Objectives:
+• Ventilate the smoke and gases to maintain a tenable environment
+• Allow safe evacuation of motorists from Tunnel Bore
+• Allow safe entry of fire-fighters and disaster recovery personnel
+
+================================================================================
+PAGE 37
+================================================================================
+Ventilation – Escape Route
+Ventilation – Air Filtration
+• Filters required to reduce environmental impact at exhaust shaft & 
+exit portals. Also, used at air input points to tunnel ie @centrifugal 
+fan input (SARCADO nozzles)
+• Objective of Air Filtration Unit:
+• To remove most of the particulate matter, emissions and also addresses 
+the noxious gases
+• Filters installed before the fans to filter sand and small particles from the 
+air before it is pushed by the fans into the tunnel
+• Positive pressurization to stop smoke entering Escape routes
+• Air circulation in Escape Routes:
+• Normal Operation Mode: Air Handling Units and/or, Control Vents
+• When Ventilation On for Smoke Control: Automatic dampers close 
+
+================================================================================
+PAGE 38
+================================================================================
+Ventilation - Monitoring & Control
+Air Quality 
+Control
+• 4-level Air Quality Management (AQM)
+• Level 1: Clear - No operation, Level 2: Ventilation Stage 1 
+(predetermined number of fans starts), Level 3: Ventilation Stage 2 
+(all fans are running), Level 4: Urgent Alarm, fans keep running / 
+consider closing tunnel
+Maintenance 
+Control
+• Remote manual and local fan control arrangement
+• OEM programmed to automatically run for a pre-programed lapse of 
+time and frequency
+Smoke 
+Control
+• Implemented by the Master PLC as per Project specific fire 
+ventilation Cause & Effect Matrix list
+• Automatically activated by any of the available fire detection 
+systems
+SCADA 
+Monitoring
+• Monitor and record fans run hours
+• Monitor and record fans motor temperature
+• Monitor and record fans motor vibration
+*Set-Points from PIARC Technical Committee Report
+Confirmation 
+(Confirmation Mode): 
+Confirmation of fire 
+(automatic or manual)
+Evacuation 
+(Evacuation Mode): 
+Ensure ventilation will 
+not direct smoke 
+towards evacuating 
+people
+Smoke control 
+(Control Mode): Fans 
+operated 
+automatically or 
+manually to be 
+determined by tunnel 
+specific cause effect 
+ventilation 
+deployment in 
+accordance with the 
+tunnel risk evaluation
+Sequence of Operation for Smoke Control
+
+================================================================================
+PAGE 39
+================================================================================
+Other Ventilation
+• Forced Ventilation Systems Overview:
+• In tunnel associated buildings and drainage / attenuation tanks
+• Drainage retention tank ventilation - a duty and standby fan system provided
+• Wherever air exchange is necessary to keep an area safe or provide an ideal operating 
+environment for the equipment 
+• Consists of Air Handling Units (AHU) or, exhaust and intake fans. Controlled via a dedicated 
+MCC including a shared or dedicated PLC for monitoring and automatic control.
+• Functions: different levels of complexity from fans running forward, reverse and 
+at variable speeds with anemometers to monitor air speed in the tunnel and 
+adjust fans speed to obtain the desired output
+• To ventilate an electrical equipment room
+• To control the atmosphere in the UPS Room and prevent dangerous accumulation of 
+Hydrogen released by the batteries
+• To ventilate and exchange the air in drainage attenuation tanks to keep the internal 
+atmosphere inert by keeping the concentration of explosive gases at safe levels 
+• To ventilate and exchange the air in drainage attenuation tanks to keep the internal 
+atmosphere safe from poisonous gases and keep the oxygen concentration to acceptable 
+levels
+• Monitoring: Monitor system state and monitor & record fans run hours as a 
+minimum
+
+================================================================================
+PAGE 40
+================================================================================
+Other Ventilation – Automatic Control & Operation
+• Automatic control via the MCC under Normal Operating Mode
+• Duty fan shall run 15 minutes per hour to ventilate the tunnel drainage 
+sump
+• If duty fan not available, standby fan shall operate
+• Duty and Standby cyclic changeover provides duty fan rotation based 
+on the total running hours of each fan
+• Automatic control via PMCS
+• Operation of AHU shall be inhibited upon a fire alarm signal being 
+generated by two consecutive heat detection sensors in the protected 
+area 
+• In the UPS Room where applicable, the fans shall operate 
+automatically if the hydrogen concentration reaches the threshold level 
+(500 ppm) 
+• The duty fan shall operate if the monitored gases concentration in the 
+tunnel drainage attenuation tank reaches 10% of LEL
+• The duty fan shall stop running if the concentration drops below 10% of LEL
+
+================================================================================
+PAGE 41
+================================================================================
+Other Ventilation – Manual Control & Operation
+• The manual operation of the AHU should be available locally at 
+its dedicated MCC or remotely at a SCADA terminal
+• The fans will operate continuously if they are turned on 
+manually from the MCC and can only be turned off manually 
+from the MCC 
+• The MCC shall be designed with overheat protection
+
+================================================================================
+PAGE 42
+================================================================================
+Drainage System
+
+================================================================================
+PAGE 43
+================================================================================
+Drainage System – Categories/Types
+Tunnel 
+Drainage
+Sewage 
+Holding Tank
+Flood 
+warning sub-
+system
+
+================================================================================
+PAGE 44
+================================================================================
+Drainage System – Tunnel Drainage
+• Objective: to discharge collected water / split liquids from inside 
+the tunnel and to provide safe driving conditions
+• Fulfilled using:
+• a dedicated sump and pumping system or,
+• an attenuation tank and direct connection to the adjacent public 
+drainage system
+• drainage tank should be installed in the lowest point of the tunnel to 
+allow gravity drainage 
+• Tunnel Sump / Attenuation Tank Fire and Explosion Protection
+• Hydrocarbons and Oxygen monitoring system 
+• All equipment installed in the drainage tank including the pumps must 
+be Explosive Proof rated
+• Ventilation to control the composition of the atmosphere in the sump 
+• A fire alarm and an automatic foam fire suppression system
+
+================================================================================
+PAGE 45
+================================================================================
+Drainage System – Tunnel Drainage
+• Level of Fire Protection: as per NFPA 502 & NFPA 820
+• Level 1 - Item 1 & 2 of the list
+• Level 2 - Items 1, 2 & 3 of the list 
+• Level 3 - Items 1, 2, 3 & 4 of the list 
+• Pumped Drainage
+• Minimum of two pumps (1 duty + 1 standby) with Cyclic changeover.
+• Pump Operation:
+• Automatically based on pre-set values obtained from an Ultrasonic level detector connected directly 
+to the panel, the Ultrasonic level detection system should be backed up by a float level detection 
+system 
+• Manually from the pump control panel
+• Pump control panel provides overload and overheat protection for the 
+pumps
+• Drainage system integrated into the tunnel SCADA system for monitoring and 
+control
+• Containment provision to prevent any contaminated or hazardous spills 
+discharging into the surface water drainage system by continuously 
+monitoring the storage tank content and inhibit the pumps if any 
+hydrocarbons are detected. In this case, content disposed of by the tunnel 
+operator using special tankers.
+
+================================================================================
+PAGE 46
+================================================================================
+Drainage System – Tunnel Drainage
+• Level of Fire Protection: as per NFPA 502 & NFPA 820
+• Tunnel Drainage Monitoring: SCADA system shall interface 
+directly with the drainage SCADA system
+• For Pumped Drainage:
+• Fire detection status / alarm 
+• Fire suppression status 
+• Hydrocarbons Detector readings and status 
+• Pumps status (Stopped, Running, Offline, Auto, Manual) 
+• Retention tank levels (Low, High , High / High) 
+• Retention tank gas detector readings and status
+
+================================================================================
+PAGE 47
+================================================================================
+Drainage System – Sewage Holding Tanks @TSB
+• Objective: install a sewage holding tank if it is not possible to 
+directly discharge to the public sewage network
+• Fulfilled using: 
+• collect the discharged sewage water from the toilet, the pantry and 
+general drainage from the TSB 
+• tank level should be monitored by the SCADA system and present a 
+High-Level Alarm
+• Operator makes arrangements for it to be emptied manually using 
+trucks
+
+================================================================================
+PAGE 48
+================================================================================
+Drainage System – Flood Warning sub-system
+• Sensor: Water level sensors to detect surface water on the tunnels 
+carriageway (ITS scope). Redundancy provided via operational 
+procedures using CCTV , weather information from monitoring 
+stations etc
+• PMCS: 
+• provides alerts to the operator when a certain level of water is detected on 
+the carriageway 
+• tank level should be monitored by the SCADA system and present a High-
+Level Alarm
+• Operator makes arrangements for it to be emptied manually using trucks
+• Control & Monitoring
+• PMCS will automatically activate the tunnel approach DMS and LCS to warn 
+drivers to reduce speed “water on carriageway” 
+• Operator will monitor the situation and activate a tunnel closure, if 
+necessary
+• SCADA system will monitor the status of the sensor and will present an 
+alarm to the operator if the sensor is offline
+
+================================================================================
+PAGE 49
+================================================================================
+Environment 
+Monitoring 
+System
+
+
+================================================================================
+PAGE 50
+================================================================================
+Environment Monitoring System – Categories/Types
+Air Quality 
+Monitoring 
+System
+Anemometer
+Temperature 
+Sensor
+Hydrocarbons 
+Monitoring in 
+Drainage 
+attenuation 
+Tanks
+
+
+================================================================================
+PAGE 51
+================================================================================
+Environment Monitoring System – Air Quality Monitoring
+• Objective: Monitoring of different level of CO, NO gases and 
+Visibility will be done via the SCADA System. In case the level of 
+the gases exceeds a set value, the SCADA system automatically 
+operates the Ventilation System
+• Monitoring Equipment Specs:
+• Monitoring: 
+▪ The SCADA system shall monitor and record CO, NOx and Visibility 
+measurements 
+▪ Alarm will be raised if the measurements reach ventilation trigger values. 
+
+================================================================================
+PAGE 52
+================================================================================
+Environment Monitoring System – Anemometer
+• Objective: to monitor the air velocity inside the tunnel 
+• Monitoring: The SCADA system shall monitor and record air 
+velocity readings
+Environment Monitoring System – Temperature Sensor
+• Temperature in the TSB to be monitored, and an alarm should be 
+raised if the temperature exceeds the equipment ideal operating 
+ambient temperature
+
+================================================================================
+PAGE 53
+================================================================================
+Environment Monitoring System – Hydrocarbons 
+Monitoring in Drainage attenuation Tanks 
+• Objective: When the drainage attenuation tank or wet sump is directly 
+connected to or, under the carriageway, a gas detection system shall be 
+provided for continuous monitoring of oxygen, explosive gas and toxic gas 
+levels within the tunnel attenuation tank or, wet sump
+• Monitoring: provide continuous monitoring of the tunnel sump atmosphere 
+and detect any possible presence of flammable liquids spillages in the 
+drainage system or presence of gases that might harm the maintenance 
+operatives
+• Appropriate response shall be triggered using either one of the following 
+integrated systems when applicable. 
+• Sump Ventilation 
+• Drainage pumps 
+• Foam suppression system 
+• Isolation dumpers
+
+================================================================================
+PAGE 54
+================================================================================
+Environment Monitoring System – Hydrocarbons 
+Monitoring in Drainage attenuation Tanks 
+• Specs:
+• explosive proof
+• appropriate ingress protection
+• short detection and response time 
+• Note: Sensors reading and monitoring shall be arranged in two 
+stages corresponding to low and high concentrations of 
+hydrocarbon gases
+
+================================================================================
+PAGE 55
+================================================================================
+Environment Monitoring System – Hydrocarbons 
+Monitoring & Control• Alarm Thresholds:
+• >20% of LEL, L1 Alarm response:
+• Sump Ventilation 
+• Inhibit drainage pumps
+• Return of the drainage pumps to automatic status can only be activated by the operator via the SCADA terminal once absence of any hazardous spillages is confirmed 
+• If the gas concentration decreases to lower than 10% of LEL, the ventilation fans receive a command to stop
+• >40% of LEL, L2 Alarm response:
+• Audible alarm 
+• Level closely monitored by the operator 
+• Ventilation continues operating 
+• >100% of LEL, L3 Alarm response:
+• The foam extinguishing system activation sequence starts 
+• Tunnel Closure 
+• Note: 
+• Properly designed gas detection systems should rarely or never reach the 
+Level 2 Alarm range
+• Fuel leak detection systems in the sump will not offer the required protection 
+provided by Hydrocarbons /Gas Monitoring systems and are not accepted as a 
+substitute for fulfilling the required protection
+
+
+================================================================================
+PAGE 56
+================================================================================
+Traffic Monitoring & Control 
+System
+
+================================================================================
+PAGE 57
+================================================================================
+Traffic Monitoring & Control System (TMCS) – 
+Categories/Types
+Video Surveillance 
+System
+Automatic 
+Incident Detection 
+(AID)
+Lane Control Sign 
+(LCS) / Variable 
+Speed Limit (VSL) 
+Sign System
+Traffic Signals
+Traffic Closure 
+Gates or Barriers
+Traffic Detection
+Over-height 
+Vehicle Detection 
+System
+Dynamic Message 
+Signs
+Warning and 
+Prohibitive Signs
+
+
+================================================================================
+PAGE 58
+================================================================================
+TMCS – Video Surveillance Preliminaries
+• Objective: Video Surveillance with PTZ & fixed cameras and video 
+feeds recording for triggered events 
+• Considerations:
+• view the entire Tunnel(s) & its approaches
+• interfaced to the SCADA system but control of the cameras shall be done via 
+a camera control console
+• view multi camera images simultaneously
+• fixed view cameras for monitoring pedestrian evacuation @emergency 
+walkways and escape routes
+• Mounting height and location for each camera must be designed to provide 
+the required coverage and field-of-view in case one or two cameras become 
+unavailable ie overlapping field of view
+• consider ease of maintenance and cleaning
+
+================================================================================
+PAGE 59
+================================================================================
+TMCS – Video Surveillance Control & Monitoring
+Video 
+Surveillance 
+System
+AID System
+Access Control 
+System
+Emergency Telephone 
+System
+Enclosure Proximity 
+Switches
+Incident from SCADA System
+Auto Functions:
+• direct the 
+appropriate camera 
+on the incident area
+• record the feed
+• present a pop up 
+containing the 
+images from the 
+feed on the tunnel 
+operator screen 
+
+================================================================================
+PAGE 60
+================================================================================
+TMCS – AID System Control & Monitoring
+Stopped vehicles
+ Slow moving vehicles 
+(speed configurable)
+Smoke concentration
+Pedestrian(s) and 
+Animal(s)
+Large object/debris
+ Vehicles moving in 
+the wrong direction
+Response: As per 
+Incident Matrix
+
+================================================================================
+PAGE 61
+================================================================================
+TMCS – AID System Control & Monitoring
+Incident Activated Systems (in auto)
+Stopped vehicles CCTV , DMS , LCS, Red Traffic Signal
+Slow moving vehicles CCTV , DMS, LCS
+Smoke concentration CCTV , Fire Alarm, Ventilation, DMS, LCS, Red Traffic Signal
+Pedestrian / Animal CCTV , DMS, LCS, Red Traffic Signal
+Large object/debris CCTV , DMS, LCS, Red Traffic Signal
+Wrong direction vehicles CCTV , DMS, LCS, Red Traffic Signal
+Incident Operator Action (Manual)
+Stopped vehicles or, 
+Slow moving vehicles
+Tunnel Control Room operators will closely monitor the air quality 
+and visibility through SCADA and investigate the cause using CCTV 
+Additionally, in case 
+no tunnel ventilation
+Operator may need to close the tunnel if pollution levels exceed 
+tolerable limits 
+
+================================================================================
+PAGE 62
+================================================================================
+TMCS – Lane Control Sign (LCS)/ Variable Speed Limit 
+(VSL) Sign System 
+• Location: provided within the tunnels and on the approaches
+• Objective: allows the tunnel operator to:
+• Manage traffic for various conditions and incidents
+• Operator provides information/guidance to the tunnel users
+• on lane open/close/change
+• variable traffic restrictions
+• variable speed limits
+• Role of SCADA: operation of the signs will be implemented by the 
+tunnel SCADA system following pre-determined traffic 
+management and control plans
+
+================================================================================
+PAGE 63
+================================================================================
+TMCS – Traffic Signals
+• Location: provided @tunnels portals
+• Control: Manually & from PMCS. traffic signals are not activated 
+separately but as part of a full tunnel traffic management system
+TMCS – Traffic Closure Gate / Barrier
+• Relevance: Tunnels >1000 m
+• Objective: ensure that vehicles are not able to enter the tunnel if it 
+is closed for emergency situations, such as fires or accidents 
+• Location: provided @tunnels portals
+• Control: In most cases, Locally operable (manually). In some RFP’s, 
+clause may state that it should be operable from PMCS
+
+================================================================================
+PAGE 64
+================================================================================
+TMCS – Traffic Detection System
+• Objective: to monitor and provide real-time traffic volumes within 
+the tunnels. Traffic detection should be achieved through already 
+installed systems when possible, eg AID System, magnetometers or 
+inductive loops etc
+• Role of SCADA: 
+• Time-stamped historical traffic data as below shall be collected, 
+processed and archived to assist traffic management and planning:
+• Vehicle Counts
+• Vehicle Types
+• Traffic Trends 
+• Historical data
+
+================================================================================
+PAGE 65
+================================================================================
+TMCS – Over-height Vehicle Detection System
+• Location: installed before the last junction on the tunnel approach 
+to allow the over height vehicle to deviate
+• Objective: When an Over-height vehicle is detected, warning DMS 
+signs with flashing beacons, horns, and signs with strobes are 
+activated. The vehicle will be deviated away from the tunnel
+TMCS – Dynamic Message Signs (DMS)
+• Objective: to inform and divert tunnel traffic and to clear traffic downstream of 
+fire incidents in tunnels
+• Location: at the tunnels portals and on the approach roadways to meet 
+objective
+• DMS messages are supported by LCS, VSL and Traffic Signals. Pre-determined 
+approved messages shall be programmed into the DMS controllers for 
+implementation (Project Specific). Operator will not be able to write any 
+messages on the DMS without prior approval.
+
+================================================================================
+PAGE 66
+================================================================================
+TMCS – Warning & Prohibitive Signs
+• Objective: Dynamic or Static signs (Project specific) 
+• Location: at decision points to allow the intended audience to 
+detour and avoid entering the tunnel
+• Examples: 
+• Traffic Signal Ahead
+• No HGVs
+• No Vehicles carrying Explosives or Flammable Materials
+• No Cyclists / Pedestrians / Animals
+• Turn on Headlights
+• Tunnel
+
+================================================================================
+PAGE 67
+================================================================================
+Fire Life Safety & 
+Security System
+
+================================================================================
+PAGE 68
+================================================================================
+Fire Life Safety & Security Systems (FLSSS) – 
+Categories/Types
+Access Control 
+System
+Fire Alarm 
+System
+Fire Fighting 
+Systems
+Fire pumps
+Emergency exit 
+signs
+TSB Clean Agent 
+Fire Extinguishing 
+System
+Foam Fire 
+Extinguishing 
+System
+Fire Extinguishers
+Motorized 
+Pressure Relief 
+Dampers and Fire 
+Traps
+• Relevant Standard: NFPA 502
+• Design Considerations (Project 
+specific):
+• Tunnel height, nozzle installation 
+height (if a fixed fire extinguishing 
+system is being installed), 
+expected fire load, environmental 
+conditions (e.g., corrosion, sand 
+and heat), water application rate, 
+etc
+• Fire Load: Growth rate of fire 
+(difficult to predict). Boils down to 
+specifying design Peak Fire Heat 
+Release Rate for mechanical 
+ventilation
+
+================================================================================
+PAGE 69
+================================================================================
+FLSSS – Access Control System
+• Objective: In addition to the CCTV system, an intrusion detection system 
+shall be installed to detect opening of:
+• all tunnel escape doors
+• TSB doors
+• pedestrian traffic in the egress walkways
+• Also, to limit access to only authorized people, card key or code access control with 
+intrusion detection is provided for access to the TSBs
+• For monitoring purposes, the SCADA system shall record time of access / exit 
+and the personnel who gained access using the info from the access card or 
+the access code used
+• On detection of unauthorized/intrusion event: 
+• trigger the intruder alarm system sirens
+• send an urgent alarm to the SCADA system to be recorded and displayed on the 
+operators’ screen
+• SCADA system shall send a command to the VSC system to focus the appropriate 
+camera on the opened doors for record and display. Pedestrians in the egress walkway 
+will be monitored via the dedicated CCTV system
+
+================================================================================
+PAGE 70
+================================================================================
+FLSSS – Fire Alarm System
+• Objective: The fire alarm and detection system should consist of an 
+addressable digital system with manual and automatic alarm 
+initiation, automatic heat and smoke detectors, and dedicated signal 
+line circuits
+• Installation: All installed fire alarm detection and initiation systems 
+such as smoke detection systems, heat detection systems and 
+manual call points systems shall be integrated to one Master Fire 
+Alarm Panel (MFAP) via a dedicated High-Level Interface (HLI) for 
+each detection system. The MFAP shall monitor and control all the 
+connected devices.
+• Integrations: The MFAP shall be integrated for control with all relevant 
+fixed fire extinguishing systems such as Foam Fire Suppression 
+System, Clean Agent Fire Suppression System in the tunnel 
+associated buildings and area and Deluge & Mist Systems in the 
+tunnel tubes when applicable.
+• Other Integrations: AHU fire dampers, Air conditioning systems
+
+================================================================================
+PAGE 71
+================================================================================
+FLSSS – Fire Alarm System
+• Fire Detection Methods in the Tunnel Bores: One or, more of 
+below systems normally prescribed. AID systems to be reused for 
+Fire & Smoke detection.
+• Video cameras with Automatic Imaging Detection (AID) technology / 
+Optical Detectors / Aspiration Detectors for smoke detection
+• Linear Heat Detection systems for heat detection 
+• Video cameras with Automatic Imaging Detection technology / Optical 
+Detectors for flame detection
+• Fire Detection Methods in the TSB: Automatic smoke and heat 
+detectors, manual fire alarm boxes, and horn/strobe alarms.
+
+================================================================================
+PAGE 72
+================================================================================
+FLSSS – Fire Alarm System
+• Positive Alarm Sequence / or double Knock Alarm Sequence: To 
+prevent false alarms from triggering a fixed fire extinguishing response 
+and resulting in costly replenishing operations and traffic delays, the 
+firefighting systems should be configured with a positive alarm 
+sequence or a double knock alarm sequence
+• Positive Alarm Sequence: On receipt of the alarm signal the TPMCS will send a 
+command to the VSC to direct and focus the relevant zone camera on the 
+affected area to enable the operator to quickly confirm whether it is a false 
+alarm or not. The operator will have the opportunity to inhibit the fire 
+extinguishing system if a fire is not confirmed. 
+• After a predetermined time delay the fire extinguishing system will be automatically 
+activated if the operator takes no action.
+• If the system is not stopped by the operator, a dialler will communicate the alarm to Civil Defence after expiry of the time delay.
+• Double Knock Alarm Sequence: Two consecutive sensors must activate before 
+the system will go into full alarm and trigger the fixed fire extinguishing system. 
+The operator will have the opportunity to inhibit the fire extinguishing system if a 
+fire is not confirmed after the first alarm.
+• A dialler will communicate the alarm to Civil Defence after the second sensor is activated
+
+================================================================================
+PAGE 73
+================================================================================
+FLSSS – Fire Alarm System
+• Monitoring & Control: The SCADA system shall:
+• Monitor all of the Alarms received and Actions performed by the Fire Alarm 
+system
+• Send commands to the VSC to direct and focus the relevant zone camera 
+on the affected area
+• Have provisions to manually control the fixed fire extinguishing system to 
+enable the operator to manually activate or stop the system from 
+activating
+• Automatically operate the ITS systems, PA system, Air-Conditioning 
+System, Ventilation fans, Pressurization fans and Motorized dampers 
+when applicable
+
+================================================================================
+PAGE 74
+================================================================================
+FLSSS – Fire Fighting System
+• As per IAN 020 and NFPA 502 and Civil Defence 
+requirements
+• Sub-systems:
+• One jockey pumps
+• Two firefighting pumps (operation mode 1+1): 
+PMCS operated
+• Fire hose connections: for water extraction
+• Pressure regulating equipment
+Tunnel 
+Standpipe 
+and Hose 
+System
+• One of the following:
+• Deluge Sprinkler Systems
+• Deluge Water spray Systems
+• Deluge Water Mist Systems
+• Deluge Foam / Water Mix System (After motorists 
+are evacuated, foam can be
+• Objectives:
+• Control fire
+• Cool air temperature 
+• Prevent fire spreading in the tunnel
+Water Based 
+Tunnel Fire 
+Fighting 
+System (WFS)
+WFS elaboration
+• Has a dedicated fire detection 
+system for auto-operation
+• Follows the Positive Alarm 
+Sequence principle
+• Divided into zones covering 
+sections of the tunnel with 
+predetermined spans
+• Simultaneous discharge of three 
+adjacent deluge zones
+• Manual Ops from MFAP & SCADA
+• Tunnel operators shall have up to 
+60 secs (configurable) from alarm 
+to evaluate the fire condition and 
+inhibit the system
+
+================================================================================
+PAGE 75
+================================================================================
+FLSSS – Fire Fighting System: Monitoring & Control
+• SCADA: monitor any auxiliary equipment which is critical to the 
+operation of the WFS. For example, operation of a valve in a 
+certain zone, operation of pumps, water presence levels, etc
+• WFS activation on trigger from:
+• Manual activation by Operator 
+• Receiving an alarm from the Linear Heat Detection system or any 
+other dedicated fire alarm system.
+• Operator confirmation of fire as part of the positive alarm sequence
+• 15 seconds elapsed with unacknowledged fire detection by CCTV or 
+Smoke Detector
+• Second detection by CCTV/Smoke detector
+• 60 seconds elapsed with no reset 
+
+================================================================================
+PAGE 76
+================================================================================
+FLSSS – Fire Fighting System: Monitoring & Control
+• Any Activation triggers: 
+• Illuminate Alarm indicator and display allocated indicator for affected 
+zone on local panel and SCADA terminal.
+• Energize alarm bell 
+• Send alarm signal to MFAP /PMCS 
+• After time delay sequence completed, the WFS shall activate
+• PMCS auto actions when pre-discharge alarm received:
+• Set TMM plan including DMS messaging for closure
+• Trigger PA message
+• Trigger radio re-broadcast (where applicable)
+
+================================================================================
+PAGE 77
+================================================================================
+FLSSS – Fire Pump
+• Objective: to maintain any of the firefighting systems water pressure and 
+flow, will operate automatically on demand and their activation is 
+executed by the system control panel
+• Manual operation shall be made available locally from the fire pumps 
+control panel. 
+• SCADA system will only monitor the pumps for status, and run hours
+FLSSS – Emergency Exit Signs
+• Objective: guide motorists inside the tunnel to the cross passages 
+and the emergency walkway in the event of an emergency
+• Power: These exit signs and all safety signs must be connected to 
+the emergency power supply system
+• Desirable: Ability to monitor status of these signs for malfunction 
+detection
+
+================================================================================
+PAGE 78
+================================================================================
+FLSSS – TSB Clean Agent Fire Extinguishing System
+• Necessity Analysis: 
+• Electrical switchgear, communication and control equipment 
+installed in TSB rooms are critical to tunnel safety and availability
+• This equipment may be damaged by the application of water or other 
+extinguishing agents such as powder and foam
+• Hence, important to complement the standard building fire safety 
+provisions offered by local regulations with a clean agent fixed fire 
+extinguishing system
+• Protected areas may be temporarily manned but they shall also make 
+provision for ventilating the extinguishing agent, storage cylinders, 
+storage area to extract any inert gas release caused by cylinders 
+venting to relieve excess pressure caused by high temperatures.
+
+================================================================================
+PAGE 79
+================================================================================
+FLSSS – TSB Clean Agent Fire Extinguishing System
+• Essential Requirements: 
+• Clean agent systems are automatically activated by a confirmed coincidence 
+operation of fire detectors in the protected area 
+• Manual activation shall be possible from the Main Fire Detection Alarm Panel, 
+from the entrances to the protected areas panels and at the Clean Agent 
+Control Panel (CACP) 
+• A manual/override key switch shall be incorporated in the CACPs adjacent to 
+the entrance to all Rooms, to allow personnel accessing the area to lock off the 
+automatic activation 
+• The status of the system shall be visually displayed at the Main Fire Detection 
+and Alarm Panel, Fire Repeater Panel, SCADA system and outside each door to 
+a room or zone
+• Status messages to be displayed are (MANUAL●AUTOMATIC) visual and (PRE-
+DISCHARGE●DISCHARGED) visual and audible alarm
+• The PRE-DISCHARGE alarms are activated at least 30 seconds before the 
+extinguishing agent is released
+
+================================================================================
+PAGE 80
+================================================================================
+FLSSS – TSB Clean Agent Fire Extinguishing System
+• Characteristics: 
+• Good extinguishing properties (causing the minimum overall damage) 
+• Enablement of uninterrupted tunnel operation or limited interruption 
+• Non-toxicity 
+• Most environmentally Friendly 
+• Minimal consequential damage to adjacent equipment (water damage, 
+corrosion, pressure blast damage on activation, etc.)
+• Dry powder automatic extinguishers are not acceptable
+• Use an Inert Gas system such as FM200 or, environmentally friendly 
+aerosol systems (must be an approved and certified system) such as 
+FirePro 
+
+================================================================================
+PAGE 81
+================================================================================
+FLSSS – TSB Clean Agent Fire Extinguishing System
+• Ventilation Dampers and Air Conditioning Units 
+• If any fire alarm is activated, the ventilation dampers operation and the air 
+conditioning units shut down in the affected zone shall be initiated 
+automatically
+• Ensures effectiveness of the clean agent fire extinguishing system
+• All area/zone doors should also be designed to be self-closing and 
+shutdown when the fire alarm is activated
+• Monitoring and Control
+• Local panel installed adjacent to each access door where the 
+extinguishing system is installed to enable the maintenance engineer to 
+gain local control
+
+================================================================================
+PAGE 82
+================================================================================
+FLSSS – TSB Clean Agent Fire Extinguishing System
+• Monitoring and Control (cont…)
+• Local panel includes:
+• An Auto / Manual switch 
+• An audible alarm
+• A flashing strobe or lamp
+• Illuminated indication. (Pre – Discharge, Discharged, Auto , Manual)
+• Automatic Operation:
+• Activation of any one of the detectors in any circuit within the affected area shall:
+• Illuminate Alarm indicator and display allocated indicator for affected zone  on the local panel
+• Energize alarm bell (1st knock alarm) 
+• Send alarm signal to MFAP /PMCS 
+• Subsequent operation of a “Cross-zoned” detector within the affected area shall:
+• Illuminate “pre-discharge” indicator on the control panel and display allocated indicator for 
+affected zone  on local panel
+• Activate shut down or closures of any associated equipment, such as ventilation dampers, 
+AHU, door or electrical equipment
+• Activate discharge horn/strobe (2nd knock alarm)
+• Start the adjustable delay timer (0-30 seconds)
+• Send alarm signal to MFAP /PMCS
+
+================================================================================
+PAGE 83
+================================================================================
+FLSSS – TSB Clean Agent Fire Extinguishing System
+• Monitoring and Control (cont…)
+• Automatic Operation (cont…):
+• After time delay sequence completed the following shall occur:
+• Activate the fire suppression system
+• Manual Operation:
+• Operation of a “Manual Override”
+• Illuminate “pre-discharge” indicator on the control panel and display allocated 
+indicator for affected zone  on local panel
+• Activate shut down or closures of any associated equipment, such as ventilation 
+dampers, AHU, door or electrical equipment
+• Activate discharge horn/strobe (2nd Nock alarm)
+• Start the adjustable delay timer (0-30 seconds)
+• Send alarm signal to MFAP /PMCS
+• After time delay sequence completed the following shall occur:
+• Activate the fire suppression system
+
+================================================================================
+PAGE 84
+================================================================================
+FLSSS – Foam Fire Extinguishing System
+• Accidental spillages eg Petrol/Diesel can result in an explosive atmosphere 
+forming in the drainage retention tanks. Hence, Hydrocarbons Monitoring 
+installed in Drainage attenuation Tanks
+• Fixed foam extinguishing systems and dry inlets to enable Fire Fighters / 
+Disaster Management teams to inject additional foam from the surface
+• Shall also be activated by the final stage of Hydrocarbon gases sensor detection 
+as a preventative measure ie activated automatically by fire alarm or manually 
+as per the Positive Alarm Sequence or, double Knock Alarm Sequence
+FLSSS – Fire Extinguishers
+• Portable fire extinguishers shall be located in every emergency 
+panel in the tunnels as prescribed
+• When the door to the fire extinguisher cabinet is opened, a contact 
+switch is activated and will present an alarm on the SCADA 
+terminal
+
+================================================================================
+PAGE 85
+================================================================================
+FLSSS – Motorized Pressure Relief Dampers and Fire Traps
+• Motorized pressure relief dampers wherever installed in the tunnel 
+or, in its associated buildings, shall be monitored and controlled by 
+the PMCS.
+• Depending on the required functionality, the SCADA system shall 
+initiate the opening or, the closing of the Motorized Dampers or Fire 
+Traps
+
+================================================================================
+PAGE 86
+================================================================================
+Voice Communication System 
+(VCS)
+
+================================================================================
+PAGE 87
+================================================================================
+Voice Communication System (VCS) – 
+Categories/Types
+Radio Re-
+Broadcasting 
+System
+GSM 
+Coverage
+Telephone 
+System
+AM/FM Re-
+Broadcasting 
+System
+Public 
+Address (PA) 
+System
+• Objective: Enable comms 
+between tunnel operators, 
+tunnel motorists and the 
+emergency services. Consists 
+of:
+• Telephone system for emergency 
+and maintenance purposes
+• Radio system for radio frequency 
+and voice communication inside 
+the tunnel
+• Public Address (PA) system for 
+announcements to tunnel drivers 
+in case of emergency
+
+================================================================================
+PAGE 88
+================================================================================
+VCS – Radio Re-Broadcasting System
+• To guarantee uninterrupted two-way radio communication inside 
+the tunnel, at the tunnel portals and inside the walkways
+• Primary means for voice communication in the tunnel areas during 
+normal operation and in case of emergency
+• Terminal for the radio system is to be located in the TSB
+• The SCADA system needs only to monitor the status of the equipment
+VCS – GSM Coverage
+• At the TSB and inside the tunnel, mobile phone antennas and 
+equipment should be installed to provide mobile phone coverage 
+within all tunnel areas
+• The SCADA system only monitors the status of the equipment
+
+================================================================================
+PAGE 89
+================================================================================
+VCS – Telephone System
+• Emergency Telephone System:
+• Provides voice communication between persons in the tunnel area and the operator in the 
+local control room or, at the TOCC/RAMC
+• Installed inside the tunnel, inside the emergency walkways and adjacent to emergency exit 
+doors
+• Fast one touch dialling (autodial on handset lift) and can be used in place of manual fire alarm 
+boxes
+• Shall be visualized on the SCADA terminal screen:
+• Off-hook emergency telephones are highlighted on the active screen
+• View of the nearest CCTV camera shall be automatically shown
+• Operator determines appropriate response
+• Configured to automatically report any problem with the phone or phone line to the PMCS
+VCS – Maintenance Telephone System
+• Installed in the TSB
+• Enables operation and maintenance staff to communicate from 
+different locations in the tunnel and its associated buildings.
+• The emergency telephone system could achieve both functions if 
+configured to do so
+
+================================================================================
+PAGE 90
+================================================================================
+VCS – AM/FM Re-Broadcast System
+• Allows the tunnel operator to break in into radio stations emissions and 
+broadcast pre-recorded announcements to tunnel motorists through their 
+vehicle radio.
+• The PA pre-recorded messages shall be used for radio broadcast announcements.
+• Local radio stations are connected to the system, so that motorists can 
+continue listening to radio programmes while in the tunnel.
+VCS – Public Address (PA) System
+• Comm from tunnel operator to tunnel motorists
+• Verbal direction to tunnel motorists in case of emergency, pre-recorded messages at a press of a button 
+he will also be able to make announcements through the PA console microphone
+• Additional pre-recorded messages can be announced from the SCADA System and added to the library
+• The PA messages are automatically activated by the SCADA system to respond to a particular tunnel 
+incident. It can also be manually used to announce message by the Control room operators or from the 
+SCADA system
+• Acoustic properties should be taken in consideration during the design and selection of 
+equipment
+• Message shall be audible in all parts of the tunnel including, emergency corridors and galleries
+
+================================================================================
+PAGE 91
+================================================================================
+Data Transmission & 
+Control System
+
+================================================================================
+PAGE 92
+================================================================================
+Data Transmission & Control System
+• Communications Network: redundant, fail-safe LAN and WAN 
+Ethernet network using copper and fibre optics based 
+structured cabling with remote I/O units monitoring status 
+and alarms
+• Connectivity should be provided locally in the TSB and remotely in 
+the RAMC/TOCC
+• Status of all routers and switches within the network should be 
+monitored by the tunnel SCADA for faults and unavailability
+• Wireless & Bluetooth Communication: May be used alongwith 
+as using GPS information, live internet updates (google 
+maps...) etc
+
+================================================================================
+PAGE 93
+================================================================================
+Miscellaneous Systems
+
+================================================================================
+PAGE 94
+================================================================================
+Miscellaneous System – Air Conditioning
+• Air- Conditioning Units are provided in TSB rooms to maintain 
+the recommended ambient temperature for the tunnel 
+systems. 
+• In case of fire, the respective TSB room Air-conditioning unit is 
+automatically switched off by SCADA. 
+• When the fire alarm is re-set, the SCADA system automatically 
+activates the units.
+
+================================================================================
+PAGE 95
+================================================================================
+That’s it!!!
+Phew…
+
+================================================================================
+PAGE 96
+================================================================================
+Incident
+ID Incident
+Manual Escalation Mode Auto Manual
+Other Actions by The 
+Operational Control Room 
+Operator
+Comment
+Confirm Mode ● Zoom in CCTV on incident, ● Zoom in CCTV on incident,
+Control  Mode ● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Set TM Plan
+● Increase Lighting
+● PA system message
+● Radio Rebroadcast Message
+Confirm Mode ● Zoom in CCTV on incident, ● Zoom in CCTV on incident,
+Control  Mode ● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+Confirm Mode ● Zoom in CCTV cameras on incident, ● Zoom in CCTV on incident,
+Evacuation Mode ● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Set TM plan
+● Increase lighting,● PA system 
+message
+● Radio Rebroadcast Message
+Control  Mode ● Inhibit Drainage Pumps ● Inhibit Tunnel bore Ventilation
+Confirm Mode ● Zoom in CCTV cameras on incident, Zoom in CCTV cameras on incident
+Control  Mode ● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+Confirm Mode ● Zoom in CCTV cameras on incident, ● Zoom in CCTV cameras on incident,
+Evacuation Mode ● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Ventilation on Fire Emergency Mode
+● Set TM plan● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Ventilation on Fire Emergency
+Mode
+● Inhibit Ventilation
+Fire Response Mode ● Deluge system triggered in
+affected zone
+●Deluge system triggered in
+affected zone
+Confirm Mode ● Zoom in CCTV cameras on
+incident
+Zoom in CCTV cameras on incident
+Control  Mode ● Set TM plan ● Set TM plan
+Confirm Mode ● Carry out a Tunnel sweep with
+CCTV (Check Cause)
+Control  Mode ● Set advance warning TM plan
+Confirm Mode ● Zoom in CCTV cameras on
+incident
+● Zoom in CCTV cameras on
+incident
+TV07 High Volume of slow 
+moving traffic
+● CCTV ● VAID
+● Traffic monitoring
+Device
+● Assess damage
+● Call Tunnels maintenance team
+● Make safe under full Tunnel bore 
+closure if necessary.
+● Call Emergency services
+● Monitor through CCTV
+● Call Tunnel Manager or
+Deputy.
+TV08 Explosion ● CCTV
+● Emergency Telephone
+● VAID
+● Emergency
+Telephone of hook
+● Emergency Panel
+Door
+● Confirm
+● Call Police
+● Call Breakdown Recovery Vehicle
+● Confirm
+● Call Police
+● Call ISU
+● Confirm
+● Call Emergency Services
+● Call ISU
+● Confirm
+● Call Emergency Services
+● Call ISU
+● Linear Heat
+Detection
+● VAID
+● Emergency Panel
+Door
+● Fire Extinguisher
+Pressure Switch
+● Emergency
+Telephone of hook
+● Visibility Monitor
+● CCTV
+● Emergency Telephone
+Vehicle FireTV05
+TV06 Tunnel Equipment or 
+structure hit and 
+damaged by passing 
+Vehicle.
+● CCTV
+● Emergency Telephone
+● SCADA Alarm for
+loss of affected system
+● VAID?
+TV04 Vehicle Collision ● CCTV
+● Emergency Telephone
+● VAID
+● Emergency Phone of
+hook
+● Emergency Panel Open
+VEHICLE RELATED EVENT
+TV03 Hazardous Fluid 
+Spillage/ Toxic Gas 
+release
+● CCTV
+● Emergency Telephone
+● VAID
+● Flood detection unit
+● Hydrocarbon detection 
+system in retaining Tank
+Monitoring / Detection /Triggering System
+● Check AQM is operational
+Sub-System Responses
+Auto
+TV01 Vehicle breakdown ● CCTV
+● Emergency Telephone
+● VAID
+● Emergency Phone of
+hook
+● Emergency Panel
+Open
+TV02 Loss of load, Objects 
+in carriageway
+● CCTV
+● Emergency Telephone
+● VAID
+● Emergency Phone of
+hook
+● Emergency Panel
+Open
+● Confirm
+● Call Emergency Services
+● Call ISU
+● Call Tunnel Manager or Deputy
+
+================================================================================
+PAGE 97
+================================================================================
+Evacuation Mode ● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+● Set TM plan
+● Increase lighting,
+● PA system message
+● Radio Rebroadcast Message
+Confirm Mode ● Zoom in CCTV cameras on incident ● Zoom in CCTV cameras on incident
+Control  Mode ● Set TM plan
+● Increase lighting
+● Set TM plan
+● Increase lighting
+● Zoom in CCTV cameras on incident ● Zoom in CCTV cameras on incident
+● Set TM plan 
+● Increase lighting
+● Set TM plan
+● Increase lighting
+TNV03 CO/ NOx High level 
+first
+trigger….
+Control  Mode ● Ventilation on Level 1
+Pollution Clearing Mode
+● Ventilation Stop when levels drop 
+below ……
+● Ventilation on Level 1 Pollution
+Clearing Mode
+● Stop Ventilation when levels
+drop below…..
+● Monitor
+TNV04 CO/ NOx High level
+second trigger…..
+Control  Mode ● Ventilation on Level 2
+Pollution Clearing Mode.
+● Ventilation revert to Level 1
+Pollution Clearing Mode when
+level drop below……
+● Ventilation Stop when levels drop 
+below ……
+● Ventilation on Level 2 Pollution
+Clearing Mode.
+● Revert Ventilation to Level 1
+Pollution Clearing Mode when
+level drop below……
+● Stop Ventilation when levels drop 
+below ……
+● Monitor
+Confirm Mode ● Carry out a Tunnel sweep with
+CCTV (Check Cause)
+Control Mode ● Operate Ventilation
+● Stop Ventilation when visibility 
+levels drop below …..
+● Implement  TE5 if fire is
+detected
+● Increase lighting
+TNV06 High Level alarm in 
+sump(1)
+Control Mode ● Start  Drainage Pump1
+● Pump1 Stop when Level
+reach  Low-Low
+● Monitor Tunnel with CCTV ● Monitor
+TNV07 High-High Level 
+alarm in sump(2)
+Control Mode ● Start Drainage Pumps 1&2 ( Pump 
+1 should already be running)
+● Pump 2 Stop when Level
+reach  Low
+● Pump 1 Stop when Level
+reach  Low-Low
+● Monitor Tunnel with CCTV ● Monitor
+Confirm Mode ● Carry out a Tunnel sweep with CCTV
+● Check Pumped Drainage system on 
+SCADA
+Control Mode ● Set TM Plan ● Set TM Plan
+Response Mode ● Critical Loads fed through
+UPS
+● Generator Starts
+● Change over switch transfer
+load on generator.
+● Monitor SCADA Terminal
+Recovery Mode ● Detect Electricity Supply re- 
+established
+● Change over switch return
+load on Electricity Supply
+● Generator Off
+● VAID
+● Emergency Telephone of 
+hook
+● Emergency Panel Door
+● CCTV
+● Telephone call
+● Call Tunnels  Maintenance
+Team
+● Sump Level Monitor
+● Reading on SCADA
+Terminal.
+● High Level Alarm 1
+● Sump Level Monitor
+●Reading on SCADA
+Terminal.
+● High-High  Level
+Alarm 2
+set portal DMS
+with “ SLOW // PEDESTRIAN” 
+message or set appropriate 
+bore closure with DMS and 
+Lane closure signs
+● AQM Reading on
+SCADA Terminal.
+● Level 1 Alarm
+● AQM Reading on
+SCADA Terminal.
+● Level 2 Alarm
+● Confirm
+● Call Police
+● Call ISU
+● VAID?
+● SCADA Alarm for
+loss of affected system
+● Confirm
+● Call Tunnels maintenance team
+● Make safe under full Tunnel bore 
+closure if necessary.
+● CCTV
+● Telephone call
+Loss or overhanging
+Tunnel Equipment,
+TNV01
+Confirm Mode
+Increase lighting, set CCTV on 
+location, inform Police, set 
+appropriate bore or Tunnel
+closure or, if deemed safe, set 
+DMS to
+“SLOW //
+FLOODS” and leave Tunnel 
+open.
+● Call ISU
+● Call Police● Monitor
+● Call Emergency services
+● Monitor through CCTV
+● Call Tunnel Manager or
+Deputy.
+TV08 Explosion ● CCTV
+● Emergency Telephone
+● VAID
+● Emergency
+Telephone of hook
+● Emergency Panel
+Door
+● Monitor
+TUNNEL SYSTEMS RELATED EVENT
+TS01 Electricity Supply 
+Failure
+● Reading on SCADA
+Terminal.
+● Power Failure Alarm
+Non Vehicle Related Event
+TNV08 Flooding in Tunnel 
+bore
+● CCTV
+● Emergency Telephone
+● Flood detection unit
+● SCADA Alarm
+TNV05 Fumes / Low visibility ● CCTV ● Visibility Reading on
+SCADA Terminal.
+● Low visibility Alarm
+Pedestrian or Animal 
+in bore
+TNV02
+VEHICLE RELATED EVENT
+
+================================================================================
+PAGE 98
+================================================================================
+TS02 Generator Failure Response Mode ● Monitor on SCADA Terminal ● Call Tunnels  Maintenance
+Team
+TS03 UPS Failure Response Mode ● Monitor on SCADA Terminal ● Call Tunnels  Maintenance
+Team
+TS04 Power Failure 
+including
+Emergency Power
+● Notice loss of
+Systems
+Response Mode ● Call Police immediately to
+implement emergency closure
+TS05 VAID camera failure Response Mode ● Increase vigilance monitoring
+through CCTV
+● Call Tunnels  Maintenance
+Team
+TS06 Loss of Lighting in 
+the
+Tunnel Bores
+● CCTV Response Mode ● Set TM Plan ● Call Police to support
+emergency closure
+● Call Tunnels  Maintenance
+Team
+TS07 CCTV Camera 
+Failure
+● Notice loss of
+Systems
+Response Mode ● Increase vigilance monitoring
+through VAID
+● Call Tunnels  Maintenance
+Team
+TS08 Emergency Phones 
+Failure
+Response Mode ● Increase vigilance monitoring
+through CCTV
+● Call Tunnels  Maintenance
+Team
+TS09 Advanced TM 
+signage failure (DMS)
+Response Mode ● Call ITS  Maintenance Team
+● Inform Tunnel Manager or
+Deputy
+TS10 Tunnel lane control 
+signs
+(LCS) failure
+Response Mode ● Call ITS  Maintenance Team
+● Inform Tunnel Manager or
+Deputy
+TS11 Radio Break-in total 
+failure
+Response Mode ● Call Tunnels Maintenance
+Team
+● Notify Civil Defence
+TS12 Total failure of the 
+Public
+Address (PA) 
+System.
+Response Mode ● Call Tunnels Maintenance
+Team
+TS01 SCADA Asset ( 
+Terminal) in fault 
+Tunnel System in 
+operation
+● Notice loss of  VDU
+TS13 SCADA Local access 
+available, remote 
+access non 
+operational
+TS14 SCADA Local and 
+remote access non 
+operational
+Response Mode 1: Free 
+flowing Traffic
+● Monitoring  traffic through
+CCTV
+Response Mode 2: 
+Stationary Traffic
+● Operate Ventilation on Level 1
+Pollution Clearing Mode
+● Stop Ventilation when traffic
+becomes fluid.
+● SCADA Terminal.
+● Radio Break In
+Failure Alarm
+● SCADA Terminal.
+● PA  Failure Alarm
+● SCADA Terminal.
+● CCTV Failure Alarm
+● SCADA Terminal.
+● Emergency Phone
+Failure Alarm
+● SCADA Terminal.
+● VAID Failure Alarm
+● SCADA Terminal
+● Lighting Failure
+Alarm
+● SCADA Terminal.
+● Generator Failure
+Alarm
+● SCADA Terminal.
+● UPS Failure Alarm
+● SCADA Terminal.
+● AQM Failure Alarm
+● Traffic monitoring Device
+● Traffic monitoring
+Device Alarm
+● Call Tunnels Maintenance
+Team
+TS15 All AQMs  Faulty
+● SCADA Terminal.
+● LCS  Failure Alarm
+TUNNEL SYSTEMS RELATED EVENT
+● SCADA Terminal.
+● DMS Failure Alarm
+
+================================================================================
+PAGE 99
+================================================================================
+TS16 Cross Bore Doors 
+(CBD) or Fire Escape 
+Door (FED) Defective 
+switch generating 
+fault through SCADA
+Confirm Mode ● Zoom in CCTV camera on
+door location
+● Call Tunnels Maintenance
+Team
+TS17 Drainage Pumps 
+failure
+(All)
+Response Mode ● Call Drainage Maintenance
+Team
+TS18 Gas alarm in sump 
+20% of Lower 
+Explosive Limit (LEL) 
+Reached
+Control Mode ● Sump Ventilation on
+● Ventilation run for enough time to 
+change one sump volume of air.
+● Explosive Gas concentration
+reaches 10% of LEL?
+Yes ● Sump Ventilation off
+No ● Ventilation should run for enough 
+time to change one more sump 
+volume of air.
+● Repeat cycle until Alarm isTS19 Gas alarm in sump 
+reaches  40% Lower 
+Explosive Limit (LEL)
+Fire Response Mode ● Sump Foam Extinguishing
+System (Time Delay)
+● Sump Ventilation off
+TS20 Fire in sump Fire Response Mode ● Sump  Foam  Extinguishing system 
+triggered (Double Nock)
+● Call QCD
+TM1 Maintenance 
+involving one bore 
+closure
+Planned Maintenance
+Call from supervisor
+Maintenance Mode ● Set TM Plan
+● Set Systems on SCADA  in
+Maintenance Mode _INHIBIT MODE-
+TM2 Maintenance 
+involving both bores 
+closure
+Planned Maintenance
+Call from supervisor
+Maintenance Mode ● Set TM Plan
+● Set Systems on SCADA  in
+Maintenance Mode _INHIBIT
+MODE-
+TM3 Ventilation Fans Maintenance Mode Run Fans for recommended duration 
+and frequency.
+● Programmed
+● QPRO
+● Sump Fire Alarm
+● SCADA Alarm
+● Fire Alarm Sounder
+PLANNED MAINTENANCE
+● QPRO
+● Sump Gas Monitor
+●SCADA Terminal.
+● LEL trigger Alarm
+●Sump Gas Monitor
+●SCADA Terminal.
+● LEL trigger Alarm
+● SCADA Terminal.
+● CBD/FED Failure
+Alarm
+● SCADA Terminal.
+● Pumps Failure
+Alarm
+TUNNEL SYSTEMS RELATED EVENT

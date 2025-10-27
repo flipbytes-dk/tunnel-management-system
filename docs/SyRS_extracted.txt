@@ -1,0 +1,2598 @@
+=== PDF: docs/SyRS.pdf ===
+Total Pages: 133
+
+
+================================================================================
+PAGE 1
+================================================================================
+Tunnel Management System
+System Requirement Specifications (SyRS)
+Ver 20 Feb 2025
+
+================================================================================
+PAGE 2
+================================================================================
+Agenda
+•Preliminaries
+•Function Vs Software Module Input-Output mapping (Ref: URS Jan 2025):
+• URS Preliminaries
+• Tunnel Plant Monitoring & Control System (PMCS)
+• Electrical Distribution System
+• Lighting System
+• Ventilation System
+• Drainage System
+• Environment Monitoring System
+• Traffic Monitoring & Control System
+• Fire Life Safety & Security System
+• Voice Communication System
+• Data Transmission & Control System
+• Miscellaneous Systems
+
+
+================================================================================
+PAGE 3
+================================================================================
+Preliminaries
+
+
+================================================================================
+PAGE 4
+================================================================================
+Top level Software Modules (TSB/TOCC/RAMC)
+MMI/UI
+- Network Monitoring 
+System integrated to 
+Platform Software
+- Own Product backend 
+& UI’s integrated to 
+Platform Software
+- Synthetic Layout 
+capable of underlays & 
+overlays (eg Autocad, 
+xGIS, etc)
+Rule Engine
+- Module containing 
+Project Specific Rule 
+Engine combining data 
+from disparate sensors 
+from Platform Software 
+& database
+- Conversion of raw 
+sensor data to 
+actionable insights / 
+automated automation
+- Integrated to UI via 
+Platform Software
+Platform Software
+- All standard protocols (MQTT, OPC, 
+MODBUS,  etc)
+- Non-standard 
+protocols(self-developed fast API, 
+other vendor’s proprietary protocols)
+- Integrated to Database, Rule 
+Engine, UI
+- Integrated to VaaaN Product CR 
+dockerized backend & Product UI’s
+- Prometheus for resource monitoring 
+& alert generation (on-screen & 
+email)
+- DevOps capable
+- Clustering / managing active-active 
+DC-DR handling (eg Hadoop,..)
+Database
+- Shared resource for 
+Platform Software, Rule 
+Engine, UI
+Operating System & 
+Environment
+- Linux
+- Hadoop
+- Docker
+- Python
+- Any other necessary 
+components/run-time
+
+================================================================================
+PAGE 5
+================================================================================
+Top level Software Module Interaction
+Database
+MMI/UI, MIS Rule Engine
+Platform 
+Software
+Sensors, 
+Products, 
+Actuators
+(Field & 
+Control 
+Rooms)
+Input from Sensors / Products
+Modbus / Others
+Output to Actuators / 
+Products
+Modbus / Others
+Publish 
+► ◄ Subscribe
+◄ MQTT / Others 
+►Subscribe ► 
+◄ Publish
+◄ MQTT / Others 
+►
+Raw Sensor 
+Data
+Human
+Configuration ►, 
+Command to 
+Actuators
+ ◄ Dashboard, 
+Analytics,  
+Reports
+Human origin Command for Actuators / Products
+Human Log Data 
+►
+◄ Raw Sensor Data, Log 
+Data, Transactional Data
+ ◄ System Log Data
+Raw Sensor Data 
+►
+
+================================================================================
+PAGE 6
+================================================================================
+Proposed System Stack Layout - 
+Visualization
+Project Specific Field Sensors & Actuators of TMCS, OMCS & PMCS
+Product/Sensor 1 …….. Product/Sensor m Database
+(MySQL)
+Network & SLA 
+Monitoring 
+System
+Rule 
+Engine
+MMI / UI, 
+MIS
+Dockerized Apps (as reqd)
+Platform Software Non-Dockerized Apps (as reqd)
+Cluster Environment (eg Hadoop) for redundancy
+Linux
+Compute Hardware Cluster (1-n) for fall-back / DC-DR & multiple CR’s
+Redundant Power input
+
+================================================================================
+PAGE 7
+================================================================================
+Function Vs Software 
+Input-Output mapping and/or, 
+flowchart(s)
+
+================================================================================
+PAGE 8
+================================================================================
+Architecture Functions Vs Module Input-Output 
+Mapping
+Function ID Function Module Output
+Prelim_FR0_a Hardware Architecture – 
+Control Room(s)
+Clustered Environment Active – Active DC-DR Architecture
+Operating System Open-Source Operating System
+Sandboxed Applications Use of Docker / VM Environment
+Prelim_FR0_b Hierarchy & redundancy – 
+Input Power Supply
+Raw Power (sub-station) 
+Generator
+UPS
+Equipment with battery inbuilt
+Prelim_FR0_c Hierarchy & redundancy – 
+Network
+Fibre backhaul 
+Wireless back-haul Eg. Microwave, 5G, WiMAX
+Local Ops – Wi-fi, Bluetooth 
+Prelim_FR0_d Minimum Standard Protocols All top-level Modules viz. 
+Platform Software, Rule Engine, 
+UI
+Vital: MODBUS, MQTT, OPC, NTCIP, 
+OEM proprietary
+Essential: CoAP, REST-API, AMQPPublish-Subscribe Middleware
+
+================================================================================
+PAGE 9
+================================================================================
+Architecture Functions Vs Module Input-Output 
+MappingFunction ID Function Module Output
+Prelim_FR0_e Synthetic 2D, 3D visualization UI Ability to accept Autocad, Shape files, 
+self-created overlay files
+DevOps Environment All top-level Modules, majorly 
+handled in Platform Software
+IT Security Firewall, Protection against 
+Virus, Malware, VPN, 
+Encrypted inter-module transfer
+Prelim_FR0_f Operator Training / Drill Module 
+- Desirable
+ 
+Prelim_FR0_g Emulator for sensor inputs Platform Software 
+Emulator for actuator outputs Rule Engine 
+UI Input-Output, MIS (Report) 
+Templates
+UI 
+Prelim_FR0_h System to be configurable to 
+include exclude sub-systems 
+and/or, quantity as per Project 
+specific needs
+Human input to UI & same 
+published to all modules for 
+self-configuration
+As part of this, estimate minimum 
+compute configuration for each system 
+configuration mode
+
+================================================================================
+PAGE 10
+================================================================================
+Architecture Functions Vs Module Input-Output 
+MappingFunction ID Function Module Output
+Prelim_FR0_i_a Project Specific Tunnel Synthetic UI UI Base Synthetic Map, as an over/underlay file
+Prelim_FR0_i_b Project Specific colour coded Lighting Zones eg 
+Threshold Zone, Transition Zone, Interior Zone
+UI Overlay/underlay file
+Prelim_FR0_i_c Project Specific colour coded FLSSS Zones eg 
+Alarm Zone, Activated Zone, 
+UI Overlay/underlay file
+Prelim_FR0_i_d Project Specific colour coded ITS (VIDS, etc) 
+Zones eg lanes, monitoring sections
+UI Overlay/underlay file
+Prelim_FR0_j Service Level Monitoring Software UI 
+
+================================================================================
+PAGE 11
+================================================================================
+Reference: URS 
+Preliminaries
+
+================================================================================
+PAGE 12
+================================================================================
+Functions Vs Module Input-Output Mapping
+Function ID Function Module Input Output Remarks
+Prelim_FR1 Hierarchy – 
+Control Room
+UI Human Platform, Database Priority: Local Panel > TSB > 
+TOCC > RAMCPlatform UI Publish
+Rule Engine Platform Maintain Hierarchy
+Prelim_FR2 Hierarchy – Role 
+based over-ride
+UI Human Platform, Database May or, may not be feasible to 
+over-ride Local Panel
+Refer URS PMCS section 
+(roles & rights / 
+responsibilities, Terminal & 
+Control Priorities) for 
+establishing Test plan
+Platform UI Publish
+Rule Engine Platform Over-ride CR Hierarchy
+Recover to 
+Control Room 
+Hierarchy
+UI Human Pop-up to confirm cancellation of Role 
+based over-ride. If Yes, go to 
+Prelim_FR1
+Prelim_FR3 System Operating 
+Modes
+UI Human Platform, Database
+Switch to specific UI, if applicable
+Software sub-module may 
+further activate specific 
+incident based sub-module 
+(functions for Incident – 
+Response (IR) Matrix refers)
+Platform UI Publish
+Rule Engine Platform Switch to prescribed Operation mode ie 
+software sub –module
+Prelim_FR4 Data Archiving & 
+Retrieval
+UI Human Output/Input to/from External/Shared 
+Storage
+
+
+================================================================================
+PAGE 13
+================================================================================
+Vehicle Breakdown Functions Vs Module Input-Output 
+MappingFunction ID Module Input Output
+Prelim_FR5_a Platform VAID Database, Publish
+Rule Engine Platform 1. Zoom PTZ to area of incident
+2. If confirmed by Human, following in auto:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c) PA system message
+(d) Radio Rebroadcast Message
+(e) Set speed limit in VSLS as per defined rule.
+(f)  Lane sign switched to close on affected lane sign board
+(g) Display relevant msg on VMS and advisory sign
+(h) Switch on blinkers
+UI Platform 1. Relevant PTZ pop-up, confirmation / rejection by Human
+2. Log Human actions (dB) & record incident closure notes (with 
+file upload facility)
+Prelim_FR5_b Platform ECB / 
+Emergency 
+Panel
+Subsequent Sequence of actions as per Prelim_FR5_a Outputs
+Prelim_FR5_c UI Human Subsequent Sequence of actions as per Prelim_FR5_a Outputs 
+with UI feeding input to Platform, dB
+
+================================================================================
+PAGE 14
+================================================================================
+Human I/O for Vehicle Breakdown Functions
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Blinkers – on/off
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Ventilation On/off
+Lighting Luminance value to be defined.
+IF no input received all automated procedure will start as defined in Prelim_FR5_a
+
+
+================================================================================
+PAGE 15
+================================================================================
+Loss of load, Objects in carriageway Function Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR6_a Platform VAID Database, Publish
+Rule Engine Platform 1. Zoom PTZ to area of incident
+2. If confirmed by Human, following in auto:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c) PA system message
+(d) Radio Rebroadcast Message
+(e) Set speed limit in VSLS as per defined rule.
+(f) Lane sign switched to close on affected lane sign board
+(g) Display relevant msg on VMS and advisory sign
+(h) Switch on blinkers
+UI Platform Relevant PTZ pop-up, confirmation / rejection by Human
+Prelim_FR6_b Platform ECB / 
+Emergency 
+Panel
+Subsequent Sequence of actions as per Prelim_FR6_a Outputs
+Prelim_FR6_c UI Human Subsequent Sequence of actions as per Prelim_FR6_a Outputs 
+with UI feeding input to Platform, dB
+
+================================================================================
+PAGE 16
+================================================================================
+Human I/O for Loss of load, object in carriageway 
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Blinkers – on/off
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Ventilation On/off
+Lighting Luminance value to be defined.
+IF no input received all automated procedure will start as defined in Prelim_FR6_a
+
+
+================================================================================
+PAGE 17
+================================================================================
+Hazardous Fluid Spillage/ Toxic Gas release Function Vs 
+Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR7_a Platform VAID Database, Publish
+Rule Engine Platform 1. Zoom PTZ to area of incident
+2. If confirmed by Human, Perform following in auto for 
+evacuation:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c) PA system message
+(d) Radio Rebroadcast Message
+(e) Inhibit drainage pumps
+(g) Set messages in VMS and advisory signs
+(h) Start appropriate ventilation fans as per defined rules
+UI Platform Relevant PTZ pop-up, confirmation / rejection by Human
+Prelim_FR7_b Platform ECB / Emergency Panel Subsequent Sequence of actions as per Prelim_FR7_a Outputs
+Prelim_FR7_c UI Human Subsequent Sequence of actions as per Prelim_FR7_a Outputs with 
+UI feeding input to Platform, dB
+Prelim_FR7_d Platform Flood Detection unit Subsequent Sequence of actions as per Prelim_FR7_a Outputs
+Prelim_FR7_e Platform Hydrocarbon detection 
+system in retaining tank
+Subsequent Sequence of actions as per Prelim_FR7_a Outputs
+
+================================================================================
+PAGE 18
+================================================================================
+Human I/O for Hazardous Fluid Spillage/ Toxic Gas release 
+Systems I/O on 
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Blinkers – on/off
+Traffic light - red/green
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Ventilation On/off
+Lighting Luminance value to be defined.
+IF no input received all automated procedure will start as defined in Prelim_FR7_a
+
+
+================================================================================
+PAGE 19
+================================================================================
+Vehicle Collision Function Vs Module Input-Output 
+MappingFunction ID Module Input Output
+Prelim_FR8_a Platform VAID Database, Publish
+Rule Engine Platform 1. Zoom PTZ to area of incident
+2. If confirmed by Human, for control in auto:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c) PA system message
+(d) Radio Rebroadcast Message
+(e) Set speed limit in VSLS as per defined rule.
+(f)  Lane sign switched to close on affected lane sign board
+(g) Display relevant msg on VMS and advisory sign
+(h) Start ventilation fans
+(i) Switch on blinkers
+(j) Operate traffic lights as per rules defined
+UI Platform Relevant PTZ pop-up, confirmation / rejection by Human
+Prelim_FR8_b Platform ECB / 
+Emergency 
+Panel
+Subsequent Sequence of actions as per Prelim_FR8_a Outputs
+Prelim_FR8_c UI Human Subsequent Sequence of actions as per Prelim_FR8_a Outputs 
+with UI feeding input to Platform, dB
+
+================================================================================
+PAGE 20
+================================================================================
+Human I/O for Vehicle Collision
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Blinkers – on/off
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Ventilation fans On/off
+Lighting Luminance value to be defined.
+IF no input received all automated procedure will start as defined in Prelim_FR8_a
+
+
+================================================================================
+PAGE 21
+================================================================================
+Vehicle Fire Function Vs Module Input-Output 
+MappingFunction ID Module Input Output
+Prelim_FR9_a Platform VAID Database, Publish
+Rule Engine Platform 1. Zoom PTZ to area of incident
+2. If confirmed by Human, Perform following in auto for evacuation:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c) PA system message
+(d) Radio Rebroadcast Message
+(e) Ventilation on Fire Emergency mode
+(f) Deluge system triggered in affected zone as per rules of  fire response mode.
+(g) Set speed limit in VSLS as per defined rule.
+(h)  Lane sign switched to close on affected lane sign board
+(i) Display relevant msg on VMS and advisory sign
+(j) Switch on emergency exit for affected zone(?)
+(k) Traffic light operations as per rules defined.
+UI Platform Relevant PTZ pop-up, confirmation / rejection by Human
+Prelim_FR9_b Platform ECB / Emergency Panel Subsequent Sequence of actions as per Prelim_FR9_a Outputs
+Prelim_FR9_c UI Human Subsequent Sequence of actions as per Prelim_FR9_a Outputs with UI feeding input 
+to Platform, dB
+Prelim_FR9_d Platform Linear Heat Detection unit Subsequent Sequence of actions as per Prelim_FR9_a Outputs
+Prelim_FR9_e Platform Fire Extinguisher pressure 
+switch
+Subsequent Sequence of actions as per Prelim_FR9_a Outputs
+Prelim_FR9_f Platform Visibility monitor Subsequent Sequence of actions as per Prelim_FR9_a Outputs
+
+================================================================================
+PAGE 22
+================================================================================
+Human I/O for Vehicle Fire
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Blinkers – on/off
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Ventilation fans On/off
+Lighting Luminance value to be defined.
+water Sprinkler On /off
+IF no input received all automated procedure will start as defined in Prelim_FR9_a
+
+
+================================================================================
+PAGE 23
+================================================================================
+Vehicle Tunnel Equipment / Structure hit & damaged by 
+passing Vehicle Function Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR10_a Platform VAID (Possible?) Database, Publish
+Rule Engine Platform 1. Zoom PTZ to area of incident
+2. If confirmed by Human, for control in auto:
+(a) Set Traffic Management plan
+(b) Affected lane to be closed by lane closure sign
+(c) Appropriate msg on advisory sign
+UI Platform Relevant PTZ pop-up, confirmation / rejection by Human
+Prelim_FR10_
+b
+Platform Scada Alarm For 
+Loss Of Affected 
+System
+Subsequent Sequence of actions as per Prelim_FR10_a Outputs
+Prelim_FR10_c UI Human Subsequent Sequence of actions as per Prelim_FR10_a Outputs 
+with UI feeding input to Platform, dB
+
+================================================================================
+PAGE 24
+================================================================================
+Human I/O for structure hit
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Blinkers – on/off
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Lighting Luminance value to be defined.
+IF no input received all automated procedure will start as defined in Prelim_FR10_a
+
+
+================================================================================
+PAGE 25
+================================================================================
+High Volume of slow-moving traffic Functions Vs 
+Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR11_a Platform VAID Database, Publish
+Rule Engine Platform 1. If confirmed by Human, following in auto:
+(a) Set Traffic Management plan
+(b) VMS messages to be displayed 
+(c) Speed on VSLS to be changed
+(d) Traffic light operations to control traffic 
+UI Platform 1. Relevant information pop-up, confirmation / rejection by 
+Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR11_
+b
+Platform Traffic Monitoring 
+Device
+Subsequent Sequence of actions as per Prelim_FR11_a Outputs
+Prelim_FR11_c UI Human Subsequent Sequence of actions as per Prelim_FR11_a Outputs 
+with UI feeding input to Platform, dB & record incident closure 
+notes (with file upload facility)
+
+================================================================================
+PAGE 26
+================================================================================
+Human I/O for slow moving vehicle
+ 
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+IF no input received all automated procedure will start as defined in Prelim_FR11_a
+
+
+================================================================================
+PAGE 27
+================================================================================
+Explosion Functions Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR12_a Platform VAID (Possible?) Database, Publish
+Rule 
+Engine
+Platform 1. If confirmed by Human, following in auto:
+(a) Set Traffic Management plan
+(b)  Increase lighting
+(c) PA system message
+(d) Radio Rebroadcast Message
+(e) Set speed limit in VSLS as per defined rule.
+(f)  Display relevant msg on VMS and advisory sign
+UI Platform 1. Relevant PTZ pop-up, confirmation / rejection by Human
+Prelim_FR12_b Platform ECB / Emergency 
+Panel
+Subsequent Sequence of actions as per Prelim_FR12_a Outputs
+Prelim_FR12_c UI Human Subsequent Sequence of actions as per Prelim_FR12_a Outputs 
+with UI feeding input to Platform, dB & record incident closure 
+notes (with file upload facility)
+
+================================================================================
+PAGE 28
+================================================================================
+Human I/O for explosion
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Lighting Luminance value to  be defined
+IF no input received all automated procedure will start as defined in Prelim_FR12_a
+
+
+================================================================================
+PAGE 29
+================================================================================
+Loss or overhanging Tunnel Equipment Function Vs 
+Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR13_
+a
+Platform VAID(possible?) Database, Publish
+Rule Engine Platform 1.Zoom CCTV to area of incident
+2.If confirmed by Human, following for control in auto:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c)  Set speed limit in VSLS as per defined rule.
+(d)  Lane sign switched to close on lane sign board
+(e) Display relevant msg on VMS and advisory sign
+UI Platform 1. Relevant CCTV pop-up, confirmation / rejection by 
+Human
+2. Log Human actions (dB) & record incident closure 
+notes (with file upload facility)
+Prelim_FR13_
+b
+Platform SCADA Alarm for loss 
+of affected system
+Subsequent Sequence of actions as per Prelim_FR13_a 
+Outputs
+Prelim_FR13_
+c
+UI Human Subsequent Sequence of actions as per Prelim_FR13_a 
+Outputs with UI feeding input to Platform, dB
+
+================================================================================
+PAGE 30
+================================================================================
+Human I/O for loss or overhanging tunnel equipment
+ Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no . - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Lighting Luminance value to  be defined
+IF no input received all automated procedure will start as defined in Prelim_FR13_a
+
+
+================================================================================
+PAGE 31
+================================================================================
+Pedestrian or Animal in bore Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR14_
+a
+Platform VAID Database, Publish
+Rule 
+Engine
+Platform 1.Zoom CCTV to area of incident
+2.If confirmed by Human, following in auto:
+(a) Set Traffic Management plan
+(b) Increase lighting
+(c) Set speed limit in VSLS as per defined rule.
+(d) Display relevant msg on VMS and advisory sign
+UI Platform 1. Relevant CCTV pop-up, confirmation / rejection by 
+Human
+2. Log Human actions (dB) & record incident closure 
+notes (with file upload facility)
+Prelim_FR14_
+b
+Platform ECB Subsequent Sequence of actions as per 
+Prelim_FR14_a Outputs
+Prelim_FR14_
+c
+UI Human Subsequent Sequence of actions as per 
+Prelim_FR14_a Outputs with UI feeding input to 
+Platform, dB
+
+
+================================================================================
+PAGE 32
+================================================================================
+Human I/O for pedestrian /animal in bore
+ Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Lighting Luminance value to  be defined
+IF no input received all automated procedure will start as defined in Prelim_FR14_a
+
+
+================================================================================
+PAGE 33
+================================================================================
+CO/ NOx High level 1st trigger Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR15_
+a
+Platform AQM Reading 
+on SCADA 
+terminal
+Database, Publish
+Rule 
+Engine
+Platform  
+Following for control in auto:
+ (a) Ventilation on Level 1  Pollution Clearing Mode
+ (b) Ventilation Stop when levels drop below specified 
+level.
+(c) Appropriate message (eg Do not Stop) on VMS and 
+advisory sign
+UI Platform 1. Relevant PTZ pop-up, confirmation / rejection by 
+Human
+2. Log Human actions (dB) & record incident closure 
+notes (with file upload facility)
+Prelim_FR15_
+b
+Platform Level 1 Alarm Subsequent Sequence of actions as per Prelim_FR15_a 
+Outputs
+
+================================================================================
+PAGE 34
+================================================================================
+Human I/O for CO/NOx first trigger
+ Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+Signages VMS message no .  - to be selected in msg list
+Ventilation On/off
+IF no input received all automated procedure will start as defined in Prelim_FR15_a
+
+
+================================================================================
+PAGE 35
+================================================================================
+CO/ NOx High level 2nd trigger Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR16_
+a
+Platform AQM Reading on 
+SCADA terminal
+Database, Publish
+Rule 
+Engine
+Platform Following for control in auto:
+(a) Ventilation on Level 2 Pollution Clearing Mode
+(b) Ventilation Revert to level 1 pollution clearing mode 
+when level drops below specified level.
+(c) Ventilation stops when level drop below specified 
+level.
+(c) Appropriate message (eg Do not Stop) on VMS and 
+advisory sign
+UI Platform 1. Relevant PTZ pop-up, confirmation / rejection by 
+Human
+2. Log Human actions (dB) & record incident closure 
+notes (with file upload facility)
+Prelim_FR16_
+b
+Platform Level 2 Alarm Subsequent Sequence of actions as per 
+Prelim_FR16_a Outputs
+
+================================================================================
+PAGE 36
+================================================================================
+Human I/O for CO/Nox 2nd trigger
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Ventilation On/off
+IF no input received all automated procedure will start as defined in Prelim_FR16_a
+
+
+================================================================================
+PAGE 37
+================================================================================
+Fumes/Low Visibility Function Vs Module Input-Output 
+MappingFunction ID Module Input Output
+Prelim_FR17_aPlatform VAID Database, Publish
+Rule 
+Engine
+Platform 1.Zoom CCTV to area of incident
+2.If confirmed by Human, following for control in auto:
+(a) Operate Ventilation
+(b) Increase lighting
+(c) Stop Ventilation if Level Drops Below specified 
+level
+(d)Set speed limit in VSLS as per defined rule.
+(e) Display relevant msg on VMS and advisory sign
+UI Platform 1. Relevant CCTV pop-up, confirmation / rejection by 
+Human
+2. Log Human actions (dB) & record incident closure 
+notes (with file upload facility)
+Prelim_FR17_bPlatform Visibility Reading 
+on SCADA terminal
+Subsequent Sequence of actions as per 
+Prelim_FR17_a Outputs
+Prelim_FR17_cPlatform Low Visibility Alarm Subsequent Sequence of actions as per 
+Prelim_FR17_a Outputs
+Prelim_FR17_dUI Human Subsequent Sequence of actions as per 
+Prelim_FR17_a Outputs with UI feeding input to 
+Platform, dB
+
+================================================================================
+PAGE 38
+================================================================================
+Human I/O for pedestrian /animal in bore
+ 
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Lane sign -  green /red
+Speed Limit- speed limit to be entered
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Lighting Luminance value to  be defined
+Ventilation On/Off
+IF no input received all automated procedure will start as defined in Prelim_FR17_a
+
+
+================================================================================
+PAGE 39
+================================================================================
+High level alarm in sump(1) Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR18_a Platform Sump level 
+monitor
+Database, Publish
+Rule 
+Engine
+Platform 1. Following for control in auto:
+(a) Start drainage pump 1
+(b) Pump 1 stop when level reaches low-low
+UI Platform 1. Relevant information pop-up, confirmation / rejection 
+by Human
+2. Subsequent actions by Human with UI feeding input 
+to Platform, dB & record incident closure notes (with 
+file upload facility)
+Prelim_FR18_b Platform Reading on 
+SCADA terminal
+Subsequent Sequence of actions as per Prelim_FR18_a 
+Outputs
+Prelim_FR18_c Platform High level alarm 1 Subsequent Sequence of actions as per Prelim_FR18_a 
+Outputs
+
+================================================================================
+PAGE 40
+================================================================================
+Human I/O for high level alarm in sump
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Drainage pump On/Off
+IF no input received all automated procedure will start as defined in Prelim_FR18_a
+
+
+================================================================================
+PAGE 41
+================================================================================
+High level alarm in sump(1) Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR19_a Platform Sump level 
+monitor
+Database, Publish
+Rule 
+Engine
+Platform 1. Following for control in auto:
+(a) Start drainage pump 1 & 2 (pump 1 should already be 
+running)
+(b) Pump 2 stop when level reaches low
+(c)  Pump 1 stop when level reaches low-low
+UI Platform 1. Relevant information pop-up, confirmation / rejection by 
+Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR19_b Platform Reading on 
+SCADA terminal
+Subsequent Sequence of actions as per Prelim_FR19_a 
+Outputs
+Prelim_FR19_c Platform High level alarm 2 Subsequent Sequence of actions as per Prelim_FR19_a 
+Outputs
+
+================================================================================
+PAGE 42
+================================================================================
+Flooding in tunnel Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR20_aPlatform Flood Detection 
+Unit
+Database, Publish
+Rule 
+Engine
+Platform If confirmed by Human, following for control in 
+auto:
+(a)Set TM Plan
+(b) Display relevant msg on VMS and advisory sign
+(c) Speed limit as per defined on VSLS
+UI Platform 1. Relevant PTZ pop-up, confirmation / rejection 
+by Human
+2. Log Human actions (dB) & record incident 
+closure notes (with file upload facility)
+Prelim_FR20_
+b
+Platform SCADA Alarm Subsequent Sequence of actions as per 
+Prelim_FR20_a Outputs
+Prelim_FR20_cUI Human Subsequent Sequence of actions as per 
+Prelim_FR20_a Outputs with UI feeding input to 
+Platform, dB
+
+================================================================================
+PAGE 43
+================================================================================
+Human I/O for flooding in tunnel
+ 
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+Signages VMS message no .  - to be selected in msg list
+Speed Limit- speed limit to be entered
+Public Announcement Announcement through PA console?
+Pre recorded msg no. – to be selected from Msg list
+Lighting Luminance value to  be defined
+IF no input received all automated procedure will start as defined in Prelim_FR20_a
+
+
+================================================================================
+PAGE 44
+================================================================================
+Electricity Supply Failure Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR21_a Platform From PLC / 
+SCADA
+Database, Publish
+Rule 
+Engine
+Platform 1. Nil actions in Auto by Rule Engine. Handled in Auto by Electrical 
+Systems & thereafter, manually as per Operator Manual
+UI Platform 1. Relevant information pop-up, confirmation / rejection by Human
+2. Subsequent actions by Human with UI feeding input to Platform, dB & 
+record incident closure notes (with file upload facility)
+Prelim_FR21_b Platform Power 
+Failure 
+Alarm 
+(Electrical 
+System)
+Sequence of actions as per Prelim_FR21_a Outputs
+
+================================================================================
+PAGE 45
+================================================================================
+Generator Failure Function Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR22_a Platform From PLC / 
+SCADA
+Database, Publish
+Rule 
+Engine
+Platform 1. Nil actions in Auto by Rule Engine. Handled in Auto by 
+Electrical Systems & thereafter, manually as per Operator 
+Manual
+UI Platform 1. Relevant information pop-up, confirmation / rejection by 
+Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR22_b Platform Generator 
+Failure Alarm 
+(Electrical 
+System)
+Sequence of actions as per Prelim_FR22_a Outputs
+
+================================================================================
+PAGE 46
+================================================================================
+UPS Failure Function Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR23_a Platform From PLC / 
+SCADA
+Database, Publish
+Rule 
+Engine
+Platform 1. Nil actions in Auto by Rule Engine. Handled in Auto by 
+Electrical Systems & thereafter, manually as per Operator 
+Manual
+UI Platform 1. Relevant information pop-up, confirmation / rejection by 
+Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file upload 
+facility)
+Prelim_FR23_b Platform UPS Failure 
+Alarm (Electrical 
+System)
+Sequence of actions as per Prelim_FR23_a Outputs
+
+================================================================================
+PAGE 47
+================================================================================
+Power Failure including Emergency Power 
+Function Vs Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR24 Platform From PLC / SCADA Database, Publish
+Rule Engine Platform 1. Restore to mode it was prior to complete Power 
+failure & tunnel evacuation. Traffic diversion 
+(initiated manually).
+2. Recover System to Operation mode as per 
+available sensor/product inputs.
+UI Platform 1. Actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes 
+(with file upload facility)
+*All above actions by PMCS are initiated only after restoration of Power
+
+================================================================================
+PAGE 48
+================================================================================
+VAID Camera Failure Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR25 Platform From PLC / 
+SCADA / VAID 
+(CR)
+Database, Publish
+Rule 
+Engine
+Platform 1. Nil actions in Auto by Rule Engine. Handled manually 
+as per Operator Manual.
+UI Platform 1. Relevant information pop-up, confirmation / rejection 
+by Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+
+================================================================================
+PAGE 49
+================================================================================
+Human I/O for VAID camera failure
+ Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Video management system Associated screen display  on/off
+Lighting Luminance value to  be defined
+IF no input received all automated procedure will start as defined in Prelim_FR25_a
+
+
+================================================================================
+PAGE 50
+================================================================================
+Loss of Lighting  in tunnel Bores Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR26_
+a
+Platform From PLC / SCADA 
+/ UI (Human using 
+CCTV feed)
+Database, Publish
+Rule 
+Engine
+Platform 1. Following For Response in auto:
+(a) Set TM Plan
+(b) In case partial loss of lighting, increase 
+illumination of adjacent area lights
+UI Platform 1. Relevant CCTV pop-up, confirmation / rejection 
+by Human
+2. Log Human actions (dB) & record incident 
+closure notes (with file upload facility)
+Prelim_FR26_
+b
+Platform Lighting Failure 
+Alarm (Video Mgmt 
+System)
+Subsequent Sequence of actions as per 
+Prelim_FR26_a Outputs
+
+================================================================================
+PAGE 51
+================================================================================
+Human I/O for loss of lighting in bore
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+Lighting  of adjacent lights Luminance value to  be defined
+
+================================================================================
+PAGE 52
+================================================================================
+CCTV Camera Failure Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR27_a Platform From PLC / SCADA 
+/ UI (Human using 
+Video Wall / 
+Monitor)
+Database, Publish
+Rule 
+Engine
+Platform 1. Populate CCTV Video Wall relevant area using 
+VAID Secondary Stream
+UI Platform 1. Relevant information pop-up, confirmation / 
+rejection by Human
+2. Subsequent actions by Human with UI feeding input 
+to Platform, dB & record incident closure notes 
+(with file upload facility)
+Prelim_FR27_b Platform CCTV  Failure 
+Alarm (Video 
+Management System)
+Subsequent Sequence of actions as per Prelim_FR27_a 
+Outputs
+
+================================================================================
+PAGE 53
+================================================================================
+Human I/O for CCTV camera failure
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+video Switch to secondary stream
+IF no input received all automated procedure will start as defined in Prelim_FR27_a
+
+
+================================================================================
+PAGE 54
+================================================================================
+Emergency Phone Failure Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR28_a Platform From PLC / SCADA Database, Publish
+Rule 
+Engine
+Platform 1. Nil actions in Auto by Rule Engine. Handled 
+manually as per Operator Manual.
+UI Platform 1. Relevant information pop-up, confirmation / 
+rejection by Human
+2. Subsequent actions by Human with UI feeding 
+input to Platform, dB & record incident closure 
+notes (with file upload facility)
+Prelim_FR28_bPlatform Emergency Phone 
+Failure Alarm (ECB 
+CR)
+Subsequent Sequence of actions as per 
+Prelim_FR28_a Outputs
+
+================================================================================
+PAGE 55
+================================================================================
+Advance TM Signage (DMS) Failure Function Vs 
+Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR29_a Platform From PLC / 
+SCADA / UI 
+(Human using 
+CCTV feed)
+Database, Publish
+Rule 
+Engine
+Platform 1. Switch on Blinkers
+UI Platform 1. Relevant information pop-up, confirmation / rejection 
+by Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR29_b Platform DMS Failure 
+Alarm (DMS 
+CR)
+Sequence of actions as per Prelim_FR29_a Outputs
+
+================================================================================
+PAGE 56
+================================================================================
+Human I/O for signages failure
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+blinkers On/off
+IF no input received all automated procedure will start as defined in Prelim_FR29_a
+
+
+================================================================================
+PAGE 57
+================================================================================
+Tunnel Lane Control Signs (LCS) Failure Function Vs 
+Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR30_
+a
+Platform From PLC / SCADA 
+/ UI (Human using 
+CCTV feed)
+Database, Publish
+Rule 
+Engine
+Platform 1. Switch on Blinkers (if available) in auto.
+UI Platform 1. Relevant information pop-up, confirmation / 
+rejection by Human
+2. Subsequent actions by Human with UI feeding 
+input to Platform, dB & record incident closure 
+notes (with file upload facility)
+Prelim_FR30_
+b
+Platform LCS Failure Alarm 
+(VMS CR, if health 
+APIs available)
+Sequence of actions as per Prelim_FR30_a Outputs
+
+================================================================================
+PAGE 58
+================================================================================
+Human I/O for LCS failure
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Blinkers On /off
+IF no input received all automated procedure will start as defined in Prelim_FR30_a
+
+
+================================================================================
+PAGE 59
+================================================================================
+Radio Break-in Total Failure Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR31_a Platform From PLC / 
+SCADA
+Database, Publish
+Rule 
+Engine
+Platform 1. Following in auto:
+(a) Set relevant message on DMS
+UI Platform 1. Relevant information pop-up, confirmation / rejection 
+by Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR31_b Platform Radio Break-In  
+Failure Alarm 
+(Radio System 
+(CR)) 
+Subsequent Sequence of actions as per Prelim_FR31_a 
+Outputs
+
+================================================================================
+PAGE 60
+================================================================================
+Human I/O for Radio break-in failure
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+Signages VMS message no .  - to be selected in msg list
+IF no input received all automated procedure will start as defined in Prelim_FR31_a
+
+
+================================================================================
+PAGE 61
+================================================================================
+Total Failure of PA system Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR32_a Platform From PLC / SCADA Database, Publish
+Rule 
+Engine
+Platform 1. Following in auto:
+(a) Set relevant messages on VMS
+UI Platform 1. Relevant information pop-up, confirmation / 
+rejection by Human
+2. Subsequent actions by Human with UI feeding 
+input to Platform, dB & record incident closure 
+notes (with file upload facility)
+Prelim_FR32_bPlatform PA Failure Alarm 
+(PA System (CR))
+Subsequent Sequence of actions as per 
+Prelim_FR32_a Outputs
+
+================================================================================
+PAGE 62
+================================================================================
+Human I/O for PA failure
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages VMS message no .  - to be selected in msg list
+Speed Limit- speed limit to be entered
+IF no input received all automated procedure will start as defined in Prelim_FR20_a
+
+
+================================================================================
+PAGE 63
+================================================================================
+ALL AQM’s Faulty Function Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR33_aPlatform From PLC / SCADA Database, Publish
+Rule 
+Engine
+Platform 1.Start Tunnel fans on level 1 pollution clearing mode. Same is 
+manually/in-auto stopped when/if traffic is fluid ie detected 
+visually or, through Traffic Monitoring device
+UI Platform 1. Relevant information pop-up, confirmation / 
+rejection by Human
+2. Log Human actions (dB) & record incident closure 
+notes (with file upload facility)
+Prelim_FR33_bPlatform AQM Failure Alarm Subsequent Sequence of actions as per 
+Prelim_FR33_a Outputs
+Prelim_FR33_cPlatform Traffic monitoring 
+device
+Stop ventilation if traffic is fluid
+Prelim_FR33_dPlatform Traffic Monitoring 
+Device Alarm
+Start ventilation if traffic is not fluid
+
+================================================================================
+PAGE 64
+================================================================================
+Human I/O for all AQM’s Faulty
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+Ventilation On/Off
+IF no input received all automated procedure will start as defined in Prelim_FR33_a
+
+
+================================================================================
+PAGE 65
+================================================================================
+Cross Passage/Fire Escape Door Defective switch  
+Function Vs Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR34_a Platform From PLC / 
+SCADA
+Database, Publish
+Rule 
+Engine
+Platform 1. Zoom camera on door location
+2. Switch on Blinkers
+3. Speed limit on VSLS as defined.
+UI Platform 1. Relevant information pop-up, confirmation / rejection 
+by Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR34_b Platform CP/Fire Escape 
+Door switch 
+failure  Alarm
+Sequence of actions as per Prelim_FR34_a Outputs
+
+================================================================================
+PAGE 66
+================================================================================
+Human I/O for CP Fire escape door defect
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Signages Blinkers -on/off
+Speed Limit- speed limit to be entered
+IF no input received all automated procedure will start as defined in Prelim_FR20_a
+
+
+================================================================================
+PAGE 67
+================================================================================
+Drainage Pump (All) Failure Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR35_a Platform From PLC / 
+SCADA
+Database, Publish
+Rule Engine Platform 1.Nil actions in Auto by Rule Engine. Handled manually as 
+per Operator Manual.
+UI Platform 1. Relevant information pop-up, confirmation / rejection 
+by Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR35_b Platform Pump Failure 
+Alarm 
+(Drainage 
+System)
+Sequence of actions as per Prelim_FR35_a Outputs
+
+================================================================================
+PAGE 68
+================================================================================
+Gas alarm in sump 20 % of Lower Explosion Level 
+(LEL) Reached Function Vs Module Input-Output 
+MappingFunction ID Module Input Output
+Prelim_FR36_a Platform Drainage System 
+(Sump Gas 
+monitor)
+Database, Publish
+Rule 
+Engine
+Platform 1. Following for control in auto:
+(a) Run Ventilation for enough time to change one sump volume 
+of air. Thereafter, if concentration:
+(i) <10% of LEL: Turn off ventilation
+(ii) If >10% of LEL: Go to Step 1(a)
+UI Platform 1.Relevant information pop-up, confirmation / rejection by Human
+2.Subsequent actions by Human with UI feeding input to Platform, 
+dB & record incident closure notes (with file upload facility)
+Prelim_FR36_b Platform SCADA terminal Sequence of actions as per Prelim_FR36_a Outputs
+Prelim_FR36_c Platform Drainage System 
+(LEL Trigger 
+alarm) 
+Sequence of actions as per Prelim_FR36_a Outputs
+
+================================================================================
+PAGE 69
+================================================================================
+Human I/O for gas alarm in sump (20 % of lower Level)
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Ventilation On/off
+IF no input received all automated procedure will start as defined in Prelim_FR36_a
+
+
+================================================================================
+PAGE 70
+================================================================================
+Gas alarm in sump 40 % of Lower Explosion Level (LEL) 
+Reached Function Vs Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR37_a Platform Drainage System 
+(Sump Gas monitor)
+Database, Publish
+Rule Engine Platform 1. Following for Response in auto:
+(a) Start Sump Foam Extinguishing system (time  delay)
+(b) Sump Ventilation Off
+(c) Initiate Fire Response mode
+UI Platform 1. Relevant information pop-up, confirmation / rejection by 
+Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file 
+upload facility)
+Prelim_FR37_b Platform SCADA terminal Sequence of actions as per Prelim_FR37_a Outputs
+Prelim_FR37_c Platform Drainage System 
+(LEL Trigger alarm) 
+Sequence of actions as per Prelim_FR37_a Outputs
+
+================================================================================
+PAGE 71
+================================================================================
+Human I/O for gas alarm in sump (40 % of lower Level)
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Ventilation On/off
+Fire response mode Start/stop
+IF no input received all automated procedure will start as defined in Prelim_FR37_a
+
+
+================================================================================
+PAGE 72
+================================================================================
+Fire In Sump Function Vs Module Input-Output 
+Mapping
+Function ID Module Input Output
+Prelim_FR38_a Platform Fire Alarm 
+(Sump Fire 
+Alarm)
+Database, Publish
+Rule 
+Engine
+Platform 1. Following for Response in auto:
+(a) Trigger  Sump Foam Extinguishing system (double knock)
+(b) Initiate Fire Response mode
+UI Platform 1. Relevant information pop-up, confirmation / rejection by 
+Human
+2. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file upload 
+facility)
+Prelim_FR38_b Platform SCADA alarm Sequence of actions as per Prelim_FR38_a Outputs
+Prelim_FR37_c Platform Fire Alarm 
+Sounder
+Sequence of actions as per Prelim_FR38_a Outputs
+
+================================================================================
+PAGE 73
+================================================================================
+Human I/O for CP Fire in sump
+Systems I/O
+Confirm event Operator to confirm popup then following will appear.
+Sump foam extinguisher system Start/stop
+Fire Response mode Start/stop
+IF no input received all automated procedure will start as defined in Prelim_FR38_a
+
+
+================================================================================
+PAGE 74
+================================================================================
+Maintenance involving 1/2 bore closure Function 
+Vs Module Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR39 Platform UI – One Bore 
+closure (Human)
+Database, Publish
+UI Platform 1.Subsequent actions by Human with UI feeding input 
+to Platform, dB & record incident closure notes (with 
+file upload facility)
+Prelim_FR40 Platform UI – Two Bore 
+closure (Human)
+Database, Publish
+UI Platform 1.Subsequent actions by Human with UI feeding 
+input to Platform, dB & record incident closure 
+notes (with file upload facility)
+
+================================================================================
+PAGE 75
+================================================================================
+Ventilation fan Maintenance Function Vs Module 
+Input-Output Mapping
+Function ID Module Input Output
+Prelim_FR41_a Platform Programmed inputs Database, Publish
+Rule Engine Platform 1.Following for Maintenance mode in auto:
+(a) Run fans for recommended duration and frequency
+UI Platform 1.Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file upload 
+facility)
+
+================================================================================
+PAGE 76
+================================================================================
+Human I/O for CP Fan maintenance mode
+Systems I/O
+Confirm event Operator to confirm popup then following will 
+appear.
+Fan maintenance mode Start/stop
+IF no input received all automated procedure will start as defined in Prelim_FR41_a
+
+
+================================================================================
+PAGE 77
+================================================================================
+Traffic Management Plan Vs Module Input-Output 
+Mapping
+[Prelim_FR42a: Traffic Diversion Plan]Module Input Output
+UI Human Plans to be programmed into System for all tunnel closure scenarios. Includes:
+  Necessary diversion routes
+  All traffic signals and messaging signs to be utilized
+  Specify the corresponding function or status of each traffic signal and messaging sign on the affected route 
+during the diversion
+  Adjusting traffic signal timing and phasing to channel unexpected traffic flow
+  Deployment of pre-planned and pre-approved messages sequencing at all the DMSs
+Platform UI Publish, Database
+Rule Engine Platform 1.Activate below signage and systems used in the tunnel, its approaches and on the adjacent roads, as per Plans 
+Scenarios above:
+(a) Lane Control Signs
+(b) Dynamic Message Signs
+(c) Wig Wag or Aspect Signals
+(d) Physical Gates or Barriers
+(e) Traffic Signals (Adjacent Roads)
+UI Platform Prompt & log following for action by Human: Additional reinforcement with traffic cones, lanterns and signs
+UI Human MIS Reports - graphical flow for System & Human actions with time-stamps. Also, Incident closure form with 
+attachment. Record incident closure notes (with file upload facility)
+
+================================================================================
+PAGE 78
+================================================================================
+Traffic Management Plan Vs Module Input-Output 
+Mapping
+[Prelim_FR42b: Communication Plan]Module Input Output
+UI Human Plans to be programmed into System for all lines and modes of communication necessary 
+for its implementation. Includes:
+  Communication with various stakeholders
+  TMCS interfacing with various relevant software
+  Messages on DMS
+  Media
+  Advance warnings and announcements
+  Use of Google Maps, GPS information, internet
+
+================================================================================
+PAGE 79
+================================================================================
+Traffic Management Plan Vs Module Input-Output 
+Mapping
+[Prelim_FR42c: Activating Traffic Management Modes]Module Input Output
+UI Each Traffic Management Mode shall be titled in line with or, similar to the below format. 
+One click of button to select a particular TMM will activate the closure equipment deployment 
+sequence to implement the associated closure
+
+
+================================================================================
+PAGE 80
+================================================================================
+Traffic Management Plan Vs Module Input-Output 
+Mapping
+[Prelim_FR42d: Stopping Traffic Entering Tunnels]Module Output
+UI 2 levels of control as per NFPA 502. (a) Level 1: Stop traffic approaching tunnel portal (7.6.1) (b) Level 2: Stop 
+traffic from entering tunnel’s direct approaches (7.6.2).
+UI Prompt & log following for action by Human: Means of stopping traffic entering a tunnel:
+ Lane control signs
+ Dynamic messaging signs
+ Red traffic signs (Flashing red signs on DMS) / Flashing Amber Beacons
+ Use of various communication methods to raise public awareness (Radio, Awareness campaign, leaflets, DMS, 
+Bluetooth, google maps, GPS information  …)
+ Barriers shall not be required for Category B, A and X tunnels. 
+ All category C & D tunnels shall be provided with ducting from the tunnel to a pit at a suitable location for 
+installing a suitable barrier system or other suitable arrangement post project completion to future proof the 
+installation.
+ Barriers shall be provided for Category D tunnels (ref IAN 020) where there isn’t enough distance to provide the 
+appropriately spaced ITS, the installation of the barrier doesn’t introduce a risk to motorists and the operational 
+risk assessment concludes that the reduced ITS provisions for these tunnels will not meet the safety level provided 
+by using a barrier
+UI 
+(Human)
+MIS Reports - graphical flow for System & Human actions with time-stamps. Also, Incident closure form with 
+attachment. Record incident closure notes (with file upload facility)
+
+================================================================================
+PAGE 81
+================================================================================
+Tunnel Plant Monitoring 
+& Control System (PMCS)
+
+================================================================================
+PAGE 82
+================================================================================
+PMCS Function Vs Module Input-Output Mapping
+[PMCS_FR1: Minimum UI’s]
+Module Input Output
+UI 1)Overview Screen (including, geographical map with superposed tunnel or tunnels 
+plans and ITS equipment) 
+2)Schematic Map of the tunnel including safety systems arranged into an easier grasp 
+layout 
+3)Lighting 
+4)Electrical Distribution 
+5)Tunnel Ventilation 
+6)Service Building Security 
+7)Environmental 
+8)Pumping 
+9)Fire Safety 
+10)System Network Communications 
+11)Parameter Input screens
+12)Lighting Control Popup window
+
+================================================================================
+PAGE 83
+================================================================================
+PMCS Function Vs Module Input-Output Mapping
+[PMCS_FR2: UI Alarm & Event Monitoring Rules]
+Module Input Output
+UI 1. Alarm priorities shall be categorized as follows: 
+  URGENT safety related alarms, which require immediate action 
+  ALERT system or maintenance alarms which do not immediately jeopardize 
+tunnel operation 
+  RECORD all other events that are part of the normal operation of the tunnel 
+2. All Urgent and Alert notifications shall require operator acknowledgement
+ A full list of alarms and their priorities shall be generated during detailed system 
+design
+3. The alarms list window shall contain all the necessary information such as 
+affected system, date, time, status, category…
+
+================================================================================
+PAGE 84
+================================================================================
+PMCS Function Vs Module Input-Output Mapping
+[PMCS_FR3a: Objectives Check-off list]
+Module Output
+UI @TSB 1) Monitoring and control of lighting 
+2) Monitoring of environmental sensors & initiate relevant systems controls as appropriate 
+3) Monitoring of electrical supplies and distribution (DNO and Emergency)
+4) Monitoring and control of pumping equipment 
+5) Monitoring and control of Ventilation equipment 
+6) Monitoring and control of other HVAC 
+7) Monitoring of run hours 
+8) Global Alarm Resets
+9) User Security
+10) Control Priority
+11) Alarm And Event Handling
+12) Monitoring and control of variable thresholds & set points. 
+13) Monitoring of building services such as fire and intruder alarms 
+14) Monitoring of panel door contacts (Safety Critical) 
+15) Monitoring of emergency phones 
+16) Monitoring of portal lighting control panels 
+17) Analogue data archiving to separate trend database 
+18) Real-time and historical trending of analogue points 
+19) Data Logging And Archiving 
+20) Historical Data Browser 
+21) Help Facility 
+22) User Account Administration 
+23) Multi Systems integration for events management
+
+================================================================================
+PAGE 85
+================================================================================
+PMCS Function Vs Module Input-Output Mapping
+[PMCS_FR3b: Objectives Check-off list]
+Module Output
+Additional - 
+from all 
+SCADA 
+terminals / 
+workstations
+1) Graphical Modelling
+2) Lighting Hours Run 
+3) Historical Functions
+4) Data Trending
+5) Alarm and Event Handling
+6) Data Logging and Archiving
+7) Graphics Mimics Development & Run Time Display
+8) OPC Client Interface to SCADA Server
+9) Alarm and Event Viewing 
+10) Alarm Acknowledgement
+11) Alarm Banner Control
+
+================================================================================
+PAGE 86
+================================================================================
+PMCS Function Vs Module Input-Output Mapping
+[PMCS_FR3c: Sub-System Check-off list]
+Tunnel System 
+Category
+Tunnel sub-system / Equipment
+Tunnel Safety 
+System Support 
+Equipment
+1. High Voltage Switchgears & Transformers
+2. Low Voltage Distribution
+3. UPS System
+4. Generators
+5. Way finding Signs
+6. Cross Passage Doors/ Egress Doors/ Escape Gallery 
+and Stairs
+7. Fireman’s Panels
+Tunnel Safety 
+System
+1. Tunnel Emergency Panels
+2. Tunnel Lighting
+3. Tunnel Ventilation
+4. Pumped Drainage
+5. Attenuation Tanks (Sump) level monitoring 
+systems
+6. Attenuation Tanks (Sump) Gas Detection and 
+Ventilation Systems
+7. Attenuation Tanks (Sump)  Fire Detection and 
+Suppression Systems
+8. Monitoring Instrumentation, including air quality 
+monitoring, Anemometers, Flood Monitoring, 
+Temperature
+9. Linear Heat Detection System
+10. Tunnel Fixed Fire Extinguishing Systems
+11. Traffic Monitoring Systems
+12. Closed Circuit Television (CCTV)
+13. Video Automatic Incident Detection (VAID)
+14. Over-height Detection System
+15. Traffic Control Signs: DMS, LCS, Traffic Signals
+16. Emergency Telephones
+17. Radio Rebroadcast and Break-in System
+18. Public Address System
+19. Mobile Phone Antennae System
+20. TSB Fire Detection, Alarm and Suppression 
+Systems
+21. Buildings Access Control and Security Systems
+22. TSB Heating, Ventilation & AC
+
+================================================================================
+PAGE 87
+================================================================================
+Electrical Distribution 
+System
+
+================================================================================
+PAGE 88
+================================================================================
+Electrical Distribution System Function Vs Module Input-Output Mapping
+[Electrical_FR0: Electrical Network UI]
+Module Input Output
+UI Pre-requis
+ite
+1. Detailed Electrical Network UI indicating generation & backup components, redundancies, 
+change-over switches, status of actively monitored electrical auxiliary elements & equipment, 
+metering equipment, breaker positions for end equipment. Should incorporate relevant colour coding 
+for HV, MV, LV, Emergency Power
+2. Overlay file for all above for importing to tunnel synthetic schematic UI which combines all 
+over/underlays for Human
+
+================================================================================
+PAGE 89
+================================================================================
+Electrical Distribution System Function Vs Module Input-Output Mapping
+[Electrical_FR1: Monitoring & Control using Electrical Network UI]
+Module Input Output
+Platform Electrical 
+Systems
+Publish, Database
+UI Platform 1. High Voltage Transformers: Monitor Status of incoming and outgoing supply
+2. LV Supply: (a) Monitor Status of incoming supply (b) Monitor Status of main breakers 
+3. UPS: (a) Monitor Health Status of inverter (b) Monitor Health Status of battery (c) Monitor 
+operation status
+4. Power Metering Systems: (a) Monitor and record main power consumption, Voltage and Current 
+(b) Monitor and record systems power consumption, Voltage and Current 
+5. Generators: (a) Monitor operation status (b) Monitor Run Hours (c) Monitor Fuel tank Guage (d) 
+Automatic start generator for weekly maintenance run 
+6. Automatic Changeover Switch: (a) Monitor Status (b) Operation
+7. Equipment Breaker On/Off
+UI Human MIS Reports:
+1. Generator Running Hours
+2. All power consumption, Voltage and current metering
+
+================================================================================
+PAGE 90
+================================================================================
+Lighting System
+
+================================================================================
+PAGE 91
+================================================================================
+Tunnel Lighting Functions Vs Module Input-Output Mapping
+[Lighting_FR0: Lighting UI]
+Module Input Output
+UI Pre-requis
+ite
+1.Over/Underlay file for all Lighting Equipment & auxiliaries for importing to tunnel synthetic 
+schematic UI which combines all over/underlays for Human. Colour coding to be followed to 
+indicate:
+(a) Categories viz. Tunnel Lighting & Emergency Lighting
+(b) Escape Route Lighting & Emergency Lighting
+(c) TSB Lighting & Emergency Lighting
+2. Specify brightness levels for importing to tunnel synthetic schematic UI (onto Lighting zones 
+underlay) for Human visual appreciation
+
+================================================================================
+PAGE 92
+================================================================================
+Tunnel Lighting System Function Vs Module Input-Output Mapping
+[Electrical_FR1: Monitoring & Control]
+Module Input Output
+Platform Lighting 
+Systems
+Publish, Database
+UI Platform 1. Normal Operation:
+(a) Monitor and display the changes in lighting levels
+(b) Display faulty luminaires (including identification numbers) on the lighting mimic
+(c) Monitor and record luminaires run hours
+2. Emergency Operation: Automatic and manual control provision to trigger the lighting 
+controller to switch the lighting in the tunnel to a desired level. 
+(a) Manual control of the lighting is triggered by the operator using panel or desktop HMI
+(b) Automatic control of the lighting is triggered by another tunnel system as programmed 
+(eg A fire detected in the tunnel by LHD will switch the lighting levels to 100%)
+UI Human MIS Reports:
+1. Running Hours
+2. All power consumption, Voltage and current metering
+
+================================================================================
+PAGE 93
+================================================================================
+Ventilation System
+
+================================================================================
+PAGE 94
+================================================================================
+Ventilation Functions Vs Module Input-Output Mapping
+[Ventilation_FR0: Ventilation UI]
+Module Input Output
+UI Pre-requis
+ite
+1. Detailed Ventilation UI indicating wind direction, flow, redundancy etc alongwith associated 
+equipment like anemometer, operational status of each of these components etc. Should incorporate 
+relevant colour coding for indicating extant air flow in tunnel.
+2.Over/Underlay file for all Ventilation Equipment & auxiliaries, including mechanical devices for 
+importing to tunnel synthetic schematic UI which combines all over/underlays for Human
+3.Specify ventilation & related equipment readings for importing to tunnel synthetic schematic UI for 
+Human visual appreciation
+
+================================================================================
+PAGE 95
+================================================================================
+Ventilation System Function Vs Module Input-Output Mapping
+[Ventilation_FR1: Air Quality Monitoring & Control]
+Module Input Output
+Platform Air Quality 
+Sensors
+Publish, Database
+UI Platform 1. Normal mode: Auto by sub-system. However, provision for Manual Operation from PMCS UI 
+as per 4-level Air Quality Management (AQM)
+Level 1: Clear - No operation, Level 2: Ventilation Stage 1 (predetermined number of fans starts), 
+Level 3: Ventilation Stage 2 (all fans are running), Level 4: Urgent Alarm, fans keep running / 
+consider closing tunnel
+2. AHU Control from UI
+3. Monitoring & MIS reports:
+(a) Monitor and record fans run hours
+(b) Monitor and record fans motor temperature
+(c) Monitor and record fans motor vibration
+(d) For Forced Ventilation, Monitor system state and monitor & record fans run hours as a 
+minimum
+3. Initiation of Maintenance Mode
+Rule Engine Platform In Maintenance mode (from UI),
+1. Remote manual and local fan control arrangement
+2. OEM programmed to automatically run for a pre-programed lapse of time and frequency
+
+================================================================================
+PAGE 96
+================================================================================
+Ventilation System Function Vs Module Input-Output Mapping
+[Ventilation_FR1: Air Quality Monitoring & Control]
+Module Input Output
+Rule Engine Platform In Normal mode,
+1. Operation of AHU shall be inhibited upon a fire alarm signal being generated 
+by two consecutive heat detection sensors in the protected area 
+2. In the UPS Room where applicable, the fans shall operate automatically if the 
+hydrogen concentration reaches the threshold level (500 ppm) 
+3. The duty fan shall operate if the monitored gases concentration in the tunnel 
+drainage attenuation tank reaches 10% of LEL
+(a) The duty fan shall stop running if the concentration drops below 10% of LEL
+
+================================================================================
+PAGE 97
+================================================================================
+Drainage System
+
+================================================================================
+PAGE 98
+================================================================================
+Tunnel Drainage Functions Vs Module Input-Output Mapping
+[Drainage_FR0: Tunnel Drainage UI]
+Module Input Output
+UI Pre-requis
+ite
+1.Over/Underlay file for all Drainage Edge Equipment & auxiliaries for importing to tunnel synthetic 
+schematic UI which combines all over/underlays for Human
+2.Specify water levels for importing to tunnel synthetic schematic UI for Human visual appreciation
+
+================================================================================
+PAGE 99
+================================================================================
+Tunnel Drainage Functions Vs Module Input-Output Mapping
+[Drainage_FR1: Tunnel Sump / Attenuation Tank Fire and Explosion 
+Protection]Module Input Output
+Platform (a) Hydrocarbons 
+and Oxygen 
+monitoring system
+(b) Ultrasonic & 
+Float level detectors
+Publish, Databasea) Fire detection status / alarm b) Fire suppression status c) Hydrocarbons Detector readings and status d) Pumps status (Stopped, Running, Offline, Auto, Manual) e) Retention tank levels (Low, High , High / High) f) Retention tank gas detector readings and status
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm thresholds marked. Alarm/Pop-up at 
+thresholds with colour coding. Refer NFPA 502 & NFPA 820.
+2. Operational Status of sensors & equipment of associated actuators
+(a) Pump Overload and overheat alarm/protection  
+3. Subsequent actions by Human with UI feeding input to Platform, dB & record incident closure 
+notes (with file upload facility)
+Rule 
+Engine
+Platform 1. Activate actuators (Fire Alarm & Automatic Foam Fire suppression systems) as per business 
+rules associated with thresholds
+2. Pump operations: (a) Automatically based on pre-set values obtained from an Ultrasonic level 
+detector (backup: float level detector) connected directly to the panel (b) Cyclic change-over of 1+1 
+pumps (c) Containment provision to prevent any contaminated or hazardous spills discharging into 
+the surface water drainage system by continuously monitoring the storage tank content and inhibit the 
+pumps if any hydrocarbons are detected.
+3. Control sump ventilation as per business rules associated with thresholds
+
+================================================================================
+PAGE 100
+================================================================================
+Sewage Holding Tanks @TSB Functions Vs Module Input-Output 
+Mapping
+[Drainage_FR2: Sewage Holding Tanks Sensors & Actuators 
+Monitoring]Module Input Output
+Platform Tank level sensors Publish, Database
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm thresholds marked. 
+Alarm/Pop-up at thresholds with colour coding.
+2. Operational Status of sensors & equipment of associated actuators  
+3. Subsequent actions by Human with UI feeding input to Platform, dB & record 
+incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform -
+
+================================================================================
+PAGE 101
+================================================================================
+Flood Warning Functions Vs Module Input-Output Mapping
+[Drainage_FR3: Flood Warning Sensors & Actuators Monitoring]
+Module Input Output
+Platform ITS Water level sensors to 
+detect surface water on the 
+tunnels’ carriageway
+Publish, Database
+UI (a) Platform
+(b) Human: Redundancy 
+provided via operational 
+procedures using CCTV, 
+weather information from 
+monitoring stations etc
+1. Publish, database, if input from Human
+2. Water & Tank level Sensor Graphical (Time Vs Reading) on UI with 
+pre-defined alarm thresholds marked. Alarm/Pop-up at thresholds with 
+colour coding.  
+3. Operational Status of sensors & equipment of associated actuators
+(a) Monitor the status of the sensor and present an alarm to the operator if 
+the sensor is offline
+4. Subsequent actions by Human with UI feeding input to Platform, dB & 
+record incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform 1. Automatically activate the tunnel approach DMS and LCS to warn 
+drivers to reduce speed “water on carriageway”
+
+================================================================================
+PAGE 102
+================================================================================
+Environment 
+Monitoring 
+System
+
+
+================================================================================
+PAGE 103
+================================================================================
+Environment Monitoring System Functions Vs Module Input-Output Mapping
+[Drainage_FR0: Environment Monitoring System UI]
+Module Input Output
+UI Pre-requis
+ite
+1.Over/Underlay file for all Environment Monitoring System Edge Equipment & auxiliaries for 
+importing to tunnel synthetic schematic UI which combines all over/underlays for Human
+2.Specify pollution, visibility etc levels for importing to tunnel synthetic schematic UI (onto Lighting 
+zones underlay) for Human visual appreciation
+
+================================================================================
+PAGE 104
+================================================================================
+Environment Monitoring System Functions Vs Module Input-Output 
+Mapping
+[EMS_FR1: Air Quality Monitoring]Module Input Output
+Platform (a) COx, NOx 
+gas detector
+(b) Visibility 
+detector
+Publish, Database
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm 
+thresholds marked including activation levels for ventilation 
+system. Alarm/Pop-up at thresholds with colour coding.
+2. Operational Status of sensors & equipment of associated 
+actuators
+3. Subsequent actions by Human with UI feeding input to 
+Platform, dB & record incident closure notes (with file upload 
+facility)
+Rule 
+Engine
+Platform 1. Activate actuators (Ventilation sub-system) as per 
+business rules associated with thresholds
+
+================================================================================
+PAGE 105
+================================================================================
+Environment Monitoring System Functions Vs Module Input-Output 
+Mapping
+[EMS_FR2: Anemometer Monitoring]Module Input Output
+Platform Wind speed 
+detector
+Publish, Database
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm 
+thresholds marked. Alarm/Pop-up at thresholds with colour coding.
+2. Operational Status of sensors & equipment of associated 
+actuators
+3. Subsequent actions by Human with UI feeding input to Platform, 
+dB & record incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform -
+
+================================================================================
+PAGE 106
+================================================================================
+Environment Monitoring System Functions Vs Module Input-Output 
+Mapping
+[EMS_FR3: Hydrocarbons Monitoring in Drainage attenuation 
+Tanks/Wet Sump]Module Input Output
+Platform Gas detection 
+system (oxygen, 
+explosive gas and 
+toxic gas levels)
+Publish, Database
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm thresholds 
+marked; in two stages corresponding to low and high concentrations of 
+hydrocarbon gases (0%, LEL, HEL, 100%; refer URS). Alarm/Pop-up at 
+thresholds with colour coding.
+2. Operational Status of sensors & equipment of associated actuators
+3. Subsequent actions by Human with UI feeding input to Platform, dB & 
+record incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform Appropriate response (refer URS) shall be triggered using either one of 
+the following integrated systems, when applicable. 
+a) Sump Ventilation
+b) Drainage pumps 
+c) Foam suppression system 
+d) Isolation dumpers
+
+================================================================================
+PAGE 107
+================================================================================
+Traffic Monitoring & 
+Control  System (TMCS)
+
+================================================================================
+PAGE 108
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR0: TMCS UI]
+Module Input Output
+UI Pre-requis
+ite
+1.Detailed TMC UI indicating all sub-systems (including passive elements like painted signages etc), 
+status of actively monitored TMC equipment including salient SNMP info. Should incorporate 
+relevant colour coding for operational markings like Lanes, Bores, surveillance zones, evacuation 
+zones, diversion zones etc in the TMC UI.
+2.Over/Underlay file for all TMC Edge Equipment & auxiliaries above for importing to tunnel 
+synthetic schematic UI which combines all over/underlays for Human
+3.Specify events (alarm or, suppression) for importing to tunnel synthetic schematic UI (onto TMC 
+zones underlay) for Human visual appreciation
+
+================================================================================
+PAGE 109
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR1: Video Surveillance System]
+Module Input Output
+Video 
+Management 
+System
+PTZ & 
+fixed 
+cameras
+1. Record, Replay
+2. Live-stream multiple streams on Video Wall
+3. PTZ Control or, only Zoom control, as available in the ONVIF compliant 
+CCTV Camera
+Video 
+Management 
+System
+Platform 1. Auto-PTZ relevant camera to pre-sets according to various incident 
+generating equipment location, as published by Platform viz. AID, Access 
+Control, ECB, Emergency Panel
+2. Alarm/Pop-up. Accept/Reject event. List of Alarms / Events triggered by different 
+Systems are enumerated in relevant sub-system SYRS functions
+3. Mark start-stop time marker of video feed which would serve as proof of 
+incident
+3. Pass status of sensors to Platform which feeds the same to TMC UI & Tunnel 
+Synthetic UI
+
+================================================================================
+PAGE 110
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR2: Video based Automatic Incident Detection (VAID) System]
+Module Input Output
+Platform VAID Publish, Database
+Events: Stopped vehicles, Slow moving vehicles, Smoke concentration, Fire, 
+Pedestrian / Animal, Large object/debris, Wrong direction vehicles
+Rule Engine Platform 
+Video 
+Management 
+System
+Platform VMS functions as per TMC_FR1 for incidents listed above
+Incident Activated Systems
+Stopped vehicles DMS , LCS, Red Traffic Signal
+Slow moving vehicles DMS, LCS
+Smoke concentration Fire Alarm, Ventilation, DMS, LCS, Red Traffic 
+Signal
+Pedestrian / Animal DMS, LCS, Red Traffic Signal
+Large object/debris DMS, LCS, Red Traffic Signal
+Wrong direction vehicles DMS, LCS, Red Traffic Signal
+
+================================================================================
+PAGE 111
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR2: Video based Automatic Incident Detection (VAID) System]
+Module Input Output
+UI Platform Prompt & log following for action by Human
+UI Human MIS Reports - graphical flow for System & Human with time-stamps
+Incident Operator Action
+Stopped vehicles or, 
+Slow moving vehicles
+Tunnel Control Room operators will closely monitor the air 
+quality and visibility through SCADA and investigate the cause 
+using CCTV 
+Additionally, in case no 
+tunnel ventilation
+Operator may need to close the tunnel if pollution levels exceed 
+tolerable limits 
+
+================================================================================
+PAGE 112
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR3a to e: DMS, LCS, VSLS, Traffic Signal, Barrier]
+Module Input Output
+Platform VAID, 
+VMS, 
+Human
+Publish, Database
+Events: Stopped vehicles, Slow moving vehicles, Smoke concentration, Fire, 
+Pedestrian / Animal, Large object/debris, Wrong direction vehicles
+Rule Engine Platform Automated Actions as per Traffic Management Plan ie Prelim_FR42 to 
+Prelim_FR4x
+UI Platform Prompt & log following for action by Human: as per Traffic Management Plan ie 
+Prelim_FR42 to Prelim_FR4x
+UI Human MIS Reports - graphical flow for System & Human with time-stamps
+
+================================================================================
+PAGE 113
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR4: Traffic Detection System]
+Module Input Output
+Platform VAID, ATCC, 
+magnetometer, 
+inductive loops
+Publish, Database
+UI Platform 1. Colour coded over/underlay for Tunnel Synthetic UI
+2. Highlighting abnormalities ie incident generation, on Tunnel Synthetic UI on a 
+real-time basis followed by incident investigation using TMCS_FR1 function
+UI Human MIS Reports:
+(a) Vehicle Counts
+(b) Vehicle Types
+(c) Traffic Trends 
+(d) Historical data
+
+================================================================================
+PAGE 114
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR4: Over-Height Vehicle Detection System]
+Module Input Output
+Platform Over-height 
+Vehicle 
+Detection System 
+Publish, Database
+Rule 
+Engine
+Platform Warning DMS signs with flashing beacons, horns, and signs with strobes are 
+activated to divert traffic as per Traffic Management plan Prelim_FR42 to 
+Prelim_FR4x
+UI Platform 1. Prompt & log following for action by Human: as per Traffic Management Plan 
+ie Prelim_FR42 to Prelim_FR4x
+2. Incident generation, on Tunnel Synthetic UI on a real-time basis
+UI Human MIS Reports - graphical flow for System & Human actions with time-stamps. 
+Also, Incident closure form with attachment
+
+================================================================================
+PAGE 115
+================================================================================
+TMCS Functions Vs Module Input-Output Mapping
+[TMCS_FR4: Warning & Prohibitive Signs]
+Module Input Output
+UI Example signs: 
+(a) Traffic Signal Ahead
+(b) No HGVs
+(c) No Vehicles carrying Explosives or Flammable 
+Materials
+(d) No Cyclists / Pedestrians / Animals
+(e) Turn on Headlights
+(f) Tunnel
+Under/Overlay file to allow 
+importing to Tunnel Synthetic UI
+
+================================================================================
+PAGE 116
+================================================================================
+Fire Life Safety & Security 
+System (FLSSS)
+
+================================================================================
+PAGE 117
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR0: FLSSS UI]
+Module Input Output
+UI Pre-requis
+ite
+1.Detailed FLSSS UI indicating Fire Alarm & Suppression Systems (including Human operated 
+equipment like Fire Extinguishers etc), redundancies, status of actively monitored FLSSS equipment 
+including salient SNMP info. Should incorporate relevant colour coding for various sub-systems in 
+the DTC Network.
+2.Over/Underlay file for all FLSSS Edge Equipment & auxiliaries above for importing to tunnel 
+synthetic schematic UI which combines all over/underlays for Human
+3.Specify events (alarm or, suppression) for importing to tunnel synthetic schematic UI (onto Lighting 
+zones underlay) for Human visual appreciation
+
+================================================================================
+PAGE 118
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR1: Access Control System]
+Module Input Output
+Platform Detectors @:
+a)all tunnel escape doors
+b)TSB doors
+c)pedestrian traffic in the 
+egress walkways
+d)Biometric @TSB entries
+Publish, Database
+UI Platform 1. Record Entry/Exit of Authorized personnel
+2. Alarm/Pop-up. Accept/Reject event.
+3. Operational Status of sensors & equipment of associated 
+actuators
+4. Subsequent actions by Human with UI feeding input to Platform, 
+dB & record incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform 1. When accepted, following in auto:
+(a) Trigger Alarm
+(b) Train CCTV to intruder detection zone; as for any event, record 
+video.
+
+================================================================================
+PAGE 119
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR2a: Fire Alarm System]
+Module Input Output
+Platform Master Fire 
+Alarm Panel 
+(MFAP*)
+Publish, Database
+*MFAP integrated with Sensors (viz. smoke detection systems, heat detection systems 
+and manual call points systems) & actuators (viz. Fire Suppression Systems like Foam 
+Fire Suppression System, Clean Agent Fire Suppression System in the tunnel 
+associated buildings and area and Deluge & Mist Systems in the tunnel tubes when 
+applicable), AHU fire dampers, Air conditioning systems
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm thresholds marked
+2. Alarm/Pop-up on event. Accept/Reject event.
+3. Operational Status of sensors & equipment of associated actuators
+4. Subsequent actions by Human with UI feeding input to Platform, dB & record 
+incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform To be elaborated for each type of fire
+
+================================================================================
+PAGE 120
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR2b: Fire Alarm in Tunnel Bores & TSB]
+Module Input Output
+Platform 1. Tunnel Bores:
+(a) Video cameras with Automatic Imaging Detection 
+(AID) technology / Optical Detectors / Aspiration 
+(b) Detectors for smoke detection
+(c) Linear Heat Detection systems
+2. TSBs: 
+(a) Automatic smoke and heat detectors
+(b) Manual fire alarm boxes
+Publish, Database
+UI Platform 1. Graphical (Time Vs Reading) on UI with pre-defined alarm thresholds marked
+2. Alarm/Pop-up on event. Reject event within pre-set time duration to inhibit Fire 
+Suppression System.
+3. Operational Status of sensors & equipment of associated actuators
+4. Subsequent actions by Human with UI feeding input to Platform, dB & record 
+incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform 1. Following in Auto:
+(a) Train CCTV
+2. If event not rejected by Human, 
+(a) Auto-dial Fire Agency
+(b) Automatically operate the ITS systems, PA system, Air-Conditioning System, 
+Ventilation fans, Pressurization fans and Motorized dampers, when applicable
+3. Activate/De-activate Fire Suppression Systems from PMCS
+
+================================================================================
+PAGE 121
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR2c: Water based Fire Fighting Systems (WFS)]
+Module Input Output
+Platform Any Detector e.g. linear heat detector, 
+smoke, etc
+Publish, Database
+UI Human To manually operate WFS, Fire pumps & associated 
+auxiliaries in case of (a) fire (b) cooling Tunnel environment 
+(c) prevent fire from spreading in tunnel
+Platform (a)CCTV train
+(b)Operator has 60 secs (configurable) to inhibit WFS
+(c)Monitoring of auxiliaries eg tank water level, valve status, 
+pump status, etc
+(d)Emergency exit signs, if capable of remote switching
+Rule 
+Engine
+Platform On WFS activation,
+(a) Set TMM plan including DMS messaging for closure
+(b) Trigger PA message
+(c) Trigger radio re-broadcast (where applicable)
+
+================================================================================
+PAGE 122
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR2d: TSB Clean Agent Fire Extinguishing System]
+Module Input Output
+Platform Clean Agent System 
+(or, from fire alarm 
+system MFAP in 
+TSB)
+Publish, Database
+UI Platform (a)CCTV train
+(b)Operator has 60 secs (configurable) to inhibit WFS
+(c)Monitoring of auxiliaries eg tank water level, valve status, pump status, etc
+(d)Emergency exit signs, if capable of remote switching
+Rule 
+Engine
+Platform On Reject, inhibit Fire Extinguishing System from activating
+On Accept,
+(a) Set TMM plan including DMS messaging for closure
+(b) Trigger PA message
+(c) Trigger radio re-broadcast (where applicable)
+Human UI 1. Accept or, Reject. Reject will send inhibit signal via Rule Engine
+2. If accepted, manually activate shut down or closures of any associated 
+equipment, such as ventilation dampers, AHU, door or electrical equipment
+
+================================================================================
+PAGE 123
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR2e: Foam Fire Extinguishing System]
+Module Input Output
+Platform 1. Hydrocarbons 
+Monitoring installed in 
+Drainage attenuation Tanks 
+or, 
+2. Emergency Panel Open
+Publish, Database
+UI Platform (a)Alarm/pop-up
+(b)Emergency exit signs, if capable of remote switching
+(c)Subsequent actions by Human with UI feeding input to Platform, dB & 
+record incident closure notes (with file upload facility)
+Rule 
+Engine
+Platform (a) CCTV train
+
+================================================================================
+PAGE 124
+================================================================================
+FLSSS Functions Vs Module Input-Output Mapping
+[FLSSS_FR2f: Motorized Pressure Relief Dampers and Fire Traps]
+Module Input Output
+Platform 1. Hydrocarbons 
+Monitoring installed in 
+Drainage attenuation Tanks 
+or, 
+2. Emergency Panel Open
+Publish, Database
+UI Platform (a)Alarm/pop-up
+(b)Motorized pressure relief dampers wherever installed in the tunnel or, in 
+its associated buildings, shall be monitored and be capable of manual 
+control also
+Rule 
+Engine
+Platform (a) SCADA system shall initiate the opening or, the closing of the 
+Motorized Dampers or Fire Traps
+
+================================================================================
+PAGE 125
+================================================================================
+Voice Communication System 
+(VCS)
+
+
+================================================================================
+PAGE 126
+================================================================================
+Voice Communication System (VCS) Functions Vs Module Input-Output 
+Mapping
+[VCS_FR0: VCS UI]
+Module Input Output
+UI Pre-requis
+ite
+1.Overlay file for all VCS equipment and accessories for importing to tunnel synthetic schematic UI 
+which combines all over/underlays for Human appreciation
+
+================================================================================
+PAGE 127
+================================================================================
+Voice Communication System (VCS) Functions Vs Module Input-Output Mapping
+[VCS_FR1: Radio Re-Broadcast Monitoring & Control]
+Module Input Output
+Platform Radio Rebroadcast system Publish, Database
+Status of Equipment, as feasible from end sub-system
+UI Platform (a)Monitor the status of the equipment
+(b)Alarm/pop-up in case of equipment failure
+Voice Communication System (VCS) Functions Vs Module Input-Output Mapping
+[VCS_FR2: GSM Boosting Monitoring & Control]
+Module Input Output
+Platform GSM Boosting Publish, Database
+Status of Equipment, as feasible from end sub-system
+UI Platform (a)Monitor the status of the equipment
+(b)Alarm/pop-up in case of equipment failure
+
+================================================================================
+PAGE 128
+================================================================================
+Voice Communication System (VCS) Functions Vs Module Input-Output Mapping
+[VCS_FR1: ECB Monitoring & Control]
+Module Input Output
+Platform ECB & 
+Maintenance 
+Telephone
+Publish, Database
+Status of Equipment, as feasible from end sub-system
+UI Platform Shall be visualized on the PMCS Synthetic Map:
+(a) Off-hook emergency telephones are highlighted on the active screen
+(b) View of the nearest CCTV camera shall be automatically shown
+(c) Operator determines appropriate response
+(d) Configured to automatically report any problem with the phone or phone line to the 
+PMCS
+Rule 
+Engine
+Platform When off-hook, automatically zoom relevant CCTV to ECB zone
+
+================================================================================
+PAGE 129
+================================================================================
+Data Transmission & 
+Control System
+
+================================================================================
+PAGE 130
+================================================================================
+Data Transmission & Control (DTC) Functions Vs Module Input-Output Mapping
+[DTC_FR0: DTC UI]
+Module Input Output
+UI Pre-requis
+ite
+1. Network Monitoring System. Detailed DTC Network UI indicating L2/L3 Switches & backup 
+components, redundancies, status of actively monitored DTC equipment including salient SNMP 
+info. Should incorporate relevant colour coding for various rings, wireless & other communication 
+means in the DTC Network.
+2. Overlay file for all above for importing to tunnel synthetic schematic UI which combines all 
+over/underlays for Human appreciation
+
+================================================================================
+PAGE 131
+================================================================================
+Data Transmission & Control (DTC) Functions Vs Module Input-Output Mapping
+[DTC_FR1: Monitoring & Control]
+Module Input Output
+UI - Monitoring: 
+1. Test redundancy achieved @DTC backbone level upto cross-passage 
+level
+2. NMS: Status of all routers and switches within the network should be 
+monitored by the tunnel SCADA for faults and unavailability. 
+Alarm/pop-up in case of equipment failure
+
+================================================================================
+PAGE 132
+================================================================================
+Miscellaneous Systems
+
+================================================================================
+PAGE 133
+================================================================================
+Miscellaneous Systems Functions Vs Module Input-Output Mapping
+[Misc_FR1: Air Conditioning Unit @ TSB Monitoring & Control]
+Module Input Output
+Platform Fire 
+Alarm 
+System
+Publish, database
+Rule 
+Engine
+Platform 1. Fire Alarm Activated
+Switch Off from PMCS
+2. Fire Alarm Reset
+Switch On from PMCS
